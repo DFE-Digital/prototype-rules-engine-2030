@@ -1,0 +1,1431 @@
+<!doctype html>
+<html class="govuk-template" lang="en-GB">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="theme-color" content="#0b0c0c">
+<meta name="description" content="Interactive DfE DDT workshop prototype: demonstrate a rules engine for new demand, accessibility, security and data protection.">
+<title>Check requirements – COMPASS prototype – Department for Education</title>
+<!-- A standalone fallback is embedded first so the interface works without CDN access. -->
+<style>
+/* Offline-safe GOV.UK Design System-compatible presentation. The official
+   GOV.UK Frontend 6.6.0 stylesheet is also linked and takes precedence when available. */
+:root{--ink:#0b0c0c;--text:#0b0c0c;--muted:#505a5f;--border:#b1b4b6;--blue:#1d70b8;--blue-dark:#003078;--focus:#ffdd00;--green:#00703c;--light:#f3f2f1;--orange:#f47738}
+*{box-sizing:border-box}html{scroll-behavior:auto}body{background:#fff;margin:0;font-family:'GDS Transport',Arial,Helvetica,sans-serif;color:var(--ink);font-size:19px;line-height:1.32}button,input,select,textarea{font:inherit}a{color:var(--blue);text-decoration:underline;text-underline-offset:.13em}a:hover{color:var(--blue-dark)}a:focus,button:focus,input:focus,select:focus,textarea:focus{outline:3px solid var(--focus);outline-offset:0;box-shadow:inset 0 0 0 2px var(--ink);background:var(--focus);color:var(--ink)!important}button{cursor:pointer}p{margin:0 0 20px}.govuk-width-container{max-width:960px;margin-left:auto;margin-right:auto;padding-left:20px;padding-right:20px}.govuk-skip-link{position:absolute;left:-9999px;padding:10px 15px;background:var(--focus);color:var(--ink);z-index:999}.govuk-skip-link:focus{left:10px;top:10px}.govuk-header{background:#0b0c0c;color:#fff;border-bottom:10px solid #1d70b8}.govuk-header__container{padding-top:10px;padding-bottom:11px;display:flex;align-items:center;gap:18px;flex-wrap:wrap}.govuk-header__logotype{font-size:24px;line-height:1.2;font-weight:700;color:#fff;text-decoration:none}.govuk-header__logotype:visited{color:#fff}.govuk-header__tagline{font-size:16px;color:#fff;opacity:.88}.govuk-service-navigation{background:#f3f2f1;border-bottom:1px solid #b1b4b6}.govuk-service-navigation__container{display:flex;align-items:center;gap:38px;flex-wrap:wrap;min-height:62px}.govuk-service-navigation__service-name{font-weight:700;font-size:20px}.govuk-service-navigation__service-name a{text-decoration:none;color:#0b0c0c}.govuk-service-navigation__list{display:flex;flex-wrap:wrap;list-style:none;gap:25px;margin:0;padding:0}.govuk-service-navigation__item{padding:16px 0;border-bottom:4px solid transparent}.govuk-service-navigation__item--active{border-color:var(--blue)}.govuk-service-navigation__item a{font-size:16px;color:#0b0c0c;text-decoration:none}.govuk-service-navigation__item--active a{font-weight:bold}.govuk-phase-banner{border-bottom:1px solid var(--border);padding:12px 0}.govuk-phase-banner__content{margin:0;display:flex;align-items:center;gap:13px;font-size:16px}.govuk-tag{display:inline-block;padding:5px 8px;background:#1d70b8;color:#fff;font-weight:700;text-transform:uppercase;font-size:14px;line-height:1.2;letter-spacing:.02em;white-space:nowrap}.govuk-tag--grey{background:#f3f2f1;color:#383f43}.govuk-tag--blue{background:#e8f1f8;color:#144e81}.govuk-tag--yellow{background:#fff7bf;color:#594d00}.govuk-tag--red{background:#f9e6e7;color:#942514}.govuk-tag--green{background:#cce2d8;color:#005a30}.govuk-main-wrapper{padding-top:38px;padding-bottom:65px;min-height:65vh}.govuk-heading-xl{font-size:48px;line-height:1.08;font-weight:700;margin:12px 0 26px;max-width:770px}.govuk-heading-l{font-size:36px;line-height:1.15;margin:30px 0 20px}.govuk-heading-m{font-size:27px;line-height:1.2;margin:25px 0 16px}.govuk-heading-s{font-size:20px;line-height:1.3;margin:20px 0 10px}.govuk-caption-xl{font-size:24px;color:var(--muted);display:block;margin-bottom:8px}.govuk-body-l{font-size:24px;line-height:1.3;max-width:720px;margin-bottom:29px}.govuk-body{font-size:19px}.govuk-body-s{font-size:16px}.govuk-hint{font-size:19px;color:var(--muted);margin:8px 0 12px}.govuk-grid-row{display:flex;flex-wrap:wrap;margin:0 -15px}.govuk-grid-column-two-thirds{width:66.667%;padding:0 15px;min-width:0}.govuk-grid-column-one-third{width:33.333%;padding:0 15px;min-width:0}.govuk-button{background:var(--green);color:#fff;border:0;box-shadow:0 2px #002d18;padding:10px 15px 9px;min-height:44px;font-size:19px;font-weight:700;line-height:1.35;text-decoration:none;display:inline-block;margin:4px 15px 17px 0;vertical-align:top}.govuk-button:link,.govuk-button:visited{color:#fff}.govuk-button:hover{background:#005a30;color:#fff}.govuk-button--secondary{background:#f3f2f1;color:#0b0c0c;box-shadow:0 2px #929191}.govuk-button--secondary:hover{background:#dbdad9;color:#0b0c0c}.govuk-button--warning{background:#d4351c}.govuk-back-link{font-size:16px;display:inline-block;margin-bottom:16px;color:#0b0c0c}.govuk-inset-text{border-left:10px solid var(--border);padding:15px;margin:20px 0 30px;font-size:19px;max-width:750px}.govuk-notification-banner{border:5px solid var(--blue);margin:15px 0 30px}.govuk-notification-banner__header{padding:6px 17px;background:var(--blue);color:#fff}.govuk-notification-banner__title{font-size:19px;margin:0}.govuk-notification-banner__content{padding:20px}.govuk-notification-banner__heading{font-weight:700;font-size:24px;margin:0 0 8px}.govuk-form-group{margin:0 0 33px}.govuk-label{display:block;font-weight:700;font-size:24px;line-height:1.25;margin-bottom:8px}.govuk-label--s{font-size:19px}.govuk-fieldset{border:0;margin:0;padding:0;min-width:0}.govuk-fieldset__legend{display:block;font-weight:700;font-size:24px;line-height:1.25;margin:0 0 7px;padding:0}.govuk-radios{margin:18px 0}.govuk-radios__item{display:flex;align-items:flex-start;gap:16px;margin:0 0 12px;min-height:44px}.govuk-radios__input{appearance:none;flex:0 0 40px;width:40px;height:40px;border:2px solid #0b0c0c;border-radius:50%;margin:0;cursor:pointer;position:relative;background:#fff}.govuk-radios__input:checked:after{content:'';position:absolute;inset:9px;background:#0b0c0c;border-radius:50%}.govuk-radios__label{padding-top:7px;cursor:pointer}.govuk-input,.govuk-select,.govuk-textarea{border:2px solid #0b0c0c;background:#fff;border-radius:0;padding:8px;max-width:100%;min-height:44px}.govuk-input{width:100%}.govuk-select{max-width:100%}.govuk-details{margin:20px 0}.govuk-details__summary{cursor:pointer;color:var(--blue);text-decoration:underline;font-size:19px}.govuk-details__text{border-left:5px solid var(--border);padding:12px 17px;margin-top:14px}.govuk-summary-list{margin:15px 0 35px}.govuk-summary-list__row{display:flex;border-bottom:1px solid #b1b4b6;padding:10px 0;gap:20px}.govuk-summary-list__key{width:33.333%;flex-shrink:0;font-weight:700}.govuk-summary-list__value{margin:0;overflow-wrap:anywhere}.govuk-table{border-collapse:collapse;width:100%;margin-bottom:35px;font-size:19px}.govuk-table__header,.govuk-table__cell{border-bottom:1px solid #b1b4b6;padding:13px 15px 13px 0;text-align:left;vertical-align:top}.govuk-table__header{font-weight:700}.govuk-list{padding-left:22px;margin:15px 0 25px}.govuk-list li{margin-bottom:10px}.govuk-list--bullet{list-style:disc}.govuk-error-summary{border:5px solid #d4351c;padding:22px;margin:10px 0 30px}.govuk-error-summary__title{margin:0 0 12px;font-size:24px}.govuk-error-message{color:#d4351c;font-weight:700}.govuk-footer{background:#f3f2f1;border-top:1px solid #aeb1b3;padding:38px 0 44px;color:#505a5f}.govuk-footer a{color:#454a4d}.govuk-footer__meta{font-size:16px;line-height:1.5}.govuk-visually-hidden{position:absolute!important;height:1px!important;width:1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important}.govuk-breadcrumbs{margin:0 0 24px}.govuk-breadcrumbs__list{list-style:none;margin:0;padding:0;display:flex;gap:9px;flex-wrap:wrap}.govuk-breadcrumbs__list-item{font-size:16px}.govuk-breadcrumbs__list-item:not(:last-child):after{content:'›';padding-left:9px;color:#505a5f}
+/* Project-specific layout only; avoid faux dashboard cards. */
+.prototype-kicker{border-left:5px solid #1d70b8;padding-left:16px;margin:14px 0 28px}.prototype-kicker p{margin-bottom:8px}.work-list{margin:30px 0}.work-item{border-top:1px solid #b1b4b6;padding:22px 0}.work-item:last-child{border-bottom:1px solid #b1b4b6}.work-item h2{font-size:24px;line-height:1.25;margin:0 0 9px}.work-item p{font-size:17px;margin:0 0 9px}.work-item .meta{color:#505a5f;font-size:16px}.work-item__footer{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-top:12px}.task-progress{list-style:none;margin:20px 0 30px;padding:0;border-top:1px solid #b1b4b6}.task-progress li{border-bottom:1px solid #b1b4b6;padding:12px 0;display:flex;gap:16px;align-items:flex-start}.task-progress .num{display:inline-flex;width:28px;height:28px;background:#0b0c0c;color:#fff;align-items:center;justify-content:center;flex:none;font-size:16px;font-weight:700}.task-progress a{text-decoration:none}.flow-sentence{font-size:16px;background:#f3f2f1;padding:16px 18px;margin:25px 0;line-height:1.65}.flow-sentence strong{white-space:nowrap}.flow-sentence span{padding:0 8px;color:#505a5f}.rules-results{border-top:1px solid #b1b4b6;margin:26px 0}.rule-result{padding:23px 0;border-bottom:1px solid #b1b4b6}.rule-result h3{font-size:23px;margin:10px 0}.rule-result__meta{font-size:16px;color:#505a5f;margin:0 0 8px}.rule-result__meta strong{color:#0b0c0c}.rule-result__next{border-left:5px solid #1d70b8;background:#f3f7fa;padding:13px 16px;margin:12px 0 0}.rule-result__next p{font-size:17px;margin:0}.results-summary{display:flex;gap:24px;flex-wrap:wrap;padding:20px 0 16px;border-bottom:1px solid #b1b4b6;margin:0 0 18px}.results-summary__stat{min-width:110px}.results-summary__stat strong{display:block;font-size:36px;line-height:1.15}.results-summary__stat span{font-size:16px;color:#505a5f}.rule-filter{display:flex;flex-wrap:wrap;gap:10px;margin:27px 0 10px}.rule-filter .govuk-button{margin:0 2px 2px 0}.rule-filter .selected{outline:3px solid var(--blue);outline-offset:3px}.action-line{display:grid;grid-template-columns:1fr 220px;gap:18px;align-items:start;padding:20px 0;border-bottom:1px solid var(--border)}.action-line__name{font-size:21px;font-weight:700;margin:0 0 7px}.action-line__details{color:#505a5f;font-size:16px}.action-line .govuk-select{width:100%}.side-contents{border-top:4px solid #1d70b8;padding-top:15px;margin-top:2px}.side-contents h2{font-size:21px;margin:0 0 12px}.side-contents ul{padding:0;list-style:none;margin:0}.side-contents li{border-bottom:1px solid #b1b4b6;padding:9px 0}.side-contents li a{font-size:17px}.source-note{font-size:15px;color:#505a5f;margin-top:20px}.demo-rule-category{border-bottom:1px solid #b1b4b6;padding:18px 0}.demo-rule-category h3{margin:0 0 7px}.qr-card{border:3px solid #0b0c0c;max-width:540px;padding:25px;margin:25px 0 20px}.qr-card svg{width:285px;max-width:100%;height:auto;margin:15px auto;display:block}.qr-card p{overflow-wrap:anywhere}.demo-debug{font-size:14px;color:#505a5f}.evidence-label{margin-top:13px}.warning-inset{border-left-color:#f47738}.review-inset{border-left-color:#1d70b8}.govuk-checkboxes__item{display:flex;align-items:flex-start;gap:15px;min-height:42px;margin-bottom:10px}.govuk-checkboxes__input{width:32px;height:32px;flex:none}.govuk-checkboxes__label{padding-top:3px}.demo-inline{display:inline-block;margin-right:15px}.demo-alert{border-left:5px solid #d4351c;padding-left:15px}.action-message{border-left:6px solid #00703c;padding:11px 17px;margin:12px 0 24px;background:#f3f9f6}
+@media(max-width:760px){body{font-size:18px}.govuk-width-container{padding:0 16px}.govuk-main-wrapper{padding-top:25px;padding-bottom:40px}.govuk-heading-xl{font-size:36px;margin:9px 0 20px}.govuk-heading-l{font-size:30px}.govuk-heading-m{font-size:23px}.govuk-body-l{font-size:21px}.govuk-grid-column-one-third,.govuk-grid-column-two-thirds{width:100%}.govuk-service-navigation__container{gap:0}.govuk-service-navigation__service-name{width:100%;padding-top:13px}.govuk-service-navigation__list{gap:17px}.govuk-service-navigation__item{padding:10px 0}.govuk-header__logotype{font-size:21px}.govuk-header__tagline{font-size:14px}.govuk-summary-list__row{display:block}.govuk-summary-list__key{display:block;width:auto;margin-bottom:6px}.govuk-summary-list__value{display:block}.action-line{grid-template-columns:1fr}.side-contents{margin-top:35px}.govuk-table{font-size:16px}.govuk-table__header,.govuk-table__cell{padding:10px 8px 10px 0}.results-summary{gap:18px}.results-summary__stat strong{font-size:31px}.govuk-label,.govuk-fieldset__legend{font-size:21px}}
+@media print{.govuk-header,.govuk-service-navigation,.govuk-footer,.govuk-phase-banner,.govuk-button,.no-print,.side-contents,.govuk-skip-link{display:none!important}.govuk-main-wrapper{padding:0}.qr-card{border:0;width:100%;max-width:none}.qr-card svg{width:320px}.govuk-width-container{max-width:none}}
+
+</style>
+<!-- Official GOV.UK Frontend 6.6.0. The npm distribution's compiled stylesheet takes precedence when available. -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/govuk-frontend@6.6.0/dist/govuk/govuk-frontend.min.css">
+<style>/* Keep service navigation visible on phones even when GOV.UK enhancement is unavailable. */ .govuk-service-navigation__list { display:flex !important; flex-wrap:wrap !important; } .govuk-service-navigation__toggle { display:none !important; }</style>
+</head>
+<body class="govuk-template__body">
+<script>document.body.className += ' js-enabled' + ('noModule' in HTMLScriptElement.prototype ? ' govuk-frontend-supported' : '');</script>
+<a class="govuk-skip-link" href="#main-content">Skip to main content</a>
+<header class="govuk-header" data-module="govuk-header">
+ <div class="govuk-header__container govuk-width-container">
+  <a href="#home" class="govuk-header__logotype" aria-label="Department for Education prototype home">Department for Education</a>
+  <span class="govuk-header__tagline">Digital, Data and Technology</span>
+ </div>
+</header>
+<div class="govuk-service-navigation" data-module="govuk-service-navigation" aria-label="Service information">
+ <div class="govuk-width-container"><div class="govuk-service-navigation__container">
+  <span class="govuk-service-navigation__service-name"><a href="#home" class="govuk-service-navigation__link">COMPASS rules assessment</a></span>
+  <nav class="govuk-service-navigation__wrapper" aria-label="Menu"><ul class="govuk-service-navigation__list" id="main-navigation">
+   <li class="govuk-service-navigation__item" id="nav-work"><a href="#work" class="govuk-service-navigation__link">Example work</a></li>
+   <li class="govuk-service-navigation__item" id="nav-rules"><a href="#rules" class="govuk-service-navigation__link">Rules</a></li>
+   <li class="govuk-service-navigation__item" id="nav-share"><a href="#share" class="govuk-service-navigation__link">Share</a></li>
+  </ul></nav>
+ </div></div>
+</div>
+<div class="govuk-width-container"><div class="govuk-phase-banner"><p class="govuk-phase-banner__content"><strong class="govuk-tag govuk-tag--blue">Prototype</strong><span>Fictional work and demonstration rules. This does not determine legal compliance.</span></p></div></div>
+<div id="announcements" class="govuk-visually-hidden" role="status" aria-live="polite"></div>
+<main class="govuk-main-wrapper govuk-width-container" id="main-content" tabindex="-1"></main>
+<footer class="govuk-footer"><div class="govuk-width-container"><div class="govuk-footer__meta"><strong>COMPASS rules assessment – workshop concept</strong><p class="govuk-body-s">All work and data are fictional. No data is sent to DfE systems. This prototype is not an approved source of requirements.</p><p class="govuk-body-s">Uses GOV.UK Frontend 6.6.0 when the official CDN is available, with built-in fallback styling when it is not.</p></div></div></footer>
+<script>
+/* Browser-bundled QRCode for JavaScript by Kazuhiko Arase, copyright 2009, MIT licence. Original: http://www.d-project.com/ . Bundled from npm qrcode-terminal. */
+const WorkshopQRCode = (() => {
+  const modules={"./QRMode": function(module, exports, require) {
+module.exports = {
+    MODE_NUMBER :       1 << 0,
+    MODE_ALPHA_NUM :    1 << 1,
+    MODE_8BIT_BYTE :    1 << 2,
+    MODE_KANJI :        1 << 3
+};
+
+},
+"./QRErrorCorrectLevel": function(module, exports, require) {
+module.exports = {
+	L : 1,
+	M : 0,
+	Q : 3,
+	H : 2
+};
+
+
+},
+"./QRMaskPattern": function(module, exports, require) {
+module.exports = {
+	PATTERN000 : 0,
+	PATTERN001 : 1,
+	PATTERN010 : 2,
+	PATTERN011 : 3,
+	PATTERN100 : 4,
+	PATTERN101 : 5,
+	PATTERN110 : 6,
+	PATTERN111 : 7
+};
+
+},
+"./QRMath": function(module, exports, require) {
+var QRMath = {
+
+	glog : function(n) {
+	
+		if (n < 1) {
+			throw new Error("glog(" + n + ")");
+		}
+		
+		return QRMath.LOG_TABLE[n];
+	},
+	
+	gexp : function(n) {
+	
+		while (n < 0) {
+			n += 255;
+		}
+	
+		while (n >= 256) {
+			n -= 255;
+		}
+	
+		return QRMath.EXP_TABLE[n];
+	},
+	
+	EXP_TABLE : new Array(256),
+	
+	LOG_TABLE : new Array(256)
+
+};
+	
+for (var i = 0; i < 8; i++) {
+	QRMath.EXP_TABLE[i] = 1 << i;
+}
+for (var i = 8; i < 256; i++) {
+	QRMath.EXP_TABLE[i] = QRMath.EXP_TABLE[i - 4]
+		^ QRMath.EXP_TABLE[i - 5]
+		^ QRMath.EXP_TABLE[i - 6]
+		^ QRMath.EXP_TABLE[i - 8];
+}
+for (var i = 0; i < 255; i++) {
+	QRMath.LOG_TABLE[QRMath.EXP_TABLE[i] ] = i;
+}
+
+module.exports = QRMath;
+
+},
+"./QR8bitByte": function(module, exports, require) {
+var QRMode = require('./QRMode');
+
+function QR8bitByte(data) {
+	this.mode = QRMode.MODE_8BIT_BYTE;
+	this.data = data;
+}
+
+QR8bitByte.prototype = {
+
+	getLength : function() {
+		return this.data.length;
+	},
+	
+	write : function(buffer) {
+		for (var i = 0; i < this.data.length; i++) {
+			// not JIS ...
+			buffer.put(this.data.charCodeAt(i), 8);
+		}
+	}
+};
+
+module.exports = QR8bitByte;
+
+},
+"./QRBitBuffer": function(module, exports, require) {
+function QRBitBuffer() {
+	this.buffer = [];
+	this.length = 0;
+}
+
+QRBitBuffer.prototype = {
+
+	get : function(index) {
+		var bufIndex = Math.floor(index / 8);
+		return ( (this.buffer[bufIndex] >>> (7 - index % 8) ) & 1) == 1;
+	},
+	
+	put : function(num, length) {
+		for (var i = 0; i < length; i++) {
+			this.putBit( ( (num >>> (length - i - 1) ) & 1) == 1);
+		}
+	},
+	
+	getLengthInBits : function() {
+		return this.length;
+	},
+	
+	putBit : function(bit) {
+	
+		var bufIndex = Math.floor(this.length / 8);
+		if (this.buffer.length <= bufIndex) {
+			this.buffer.push(0);
+		}
+	
+		if (bit) {
+			this.buffer[bufIndex] |= (0x80 >>> (this.length % 8) );
+		}
+	
+		this.length++;
+	}
+};
+
+module.exports = QRBitBuffer;
+
+},
+"./QRPolynomial": function(module, exports, require) {
+var QRMath = require('./QRMath');
+
+function QRPolynomial(num, shift) {
+	if (num.length === undefined) {
+		throw new Error(num.length + "/" + shift);
+	}
+
+	var offset = 0;
+
+	while (offset < num.length && num[offset] === 0) {
+		offset++;
+	}
+
+	this.num = new Array(num.length - offset + shift);
+	for (var i = 0; i < num.length - offset; i++) {
+		this.num[i] = num[i + offset];
+	}
+}
+
+QRPolynomial.prototype = {
+
+	get : function(index) {
+		return this.num[index];
+	},
+	
+	getLength : function() {
+		return this.num.length;
+	},
+	
+	multiply : function(e) {
+	
+		var num = new Array(this.getLength() + e.getLength() - 1);
+	
+		for (var i = 0; i < this.getLength(); i++) {
+			for (var j = 0; j < e.getLength(); j++) {
+				num[i + j] ^= QRMath.gexp(QRMath.glog(this.get(i) ) + QRMath.glog(e.get(j) ) );
+			}
+		}
+	
+		return new QRPolynomial(num, 0);
+	},
+	
+	mod : function(e) {
+	
+		if (this.getLength() - e.getLength() < 0) {
+			return this;
+		}
+	
+		var ratio = QRMath.glog(this.get(0) ) - QRMath.glog(e.get(0) );
+	
+		var num = new Array(this.getLength() );
+		
+		for (var i = 0; i < this.getLength(); i++) {
+			num[i] = this.get(i);
+		}
+		
+		for (var x = 0; x < e.getLength(); x++) {
+			num[x] ^= QRMath.gexp(QRMath.glog(e.get(x) ) + ratio);
+		}
+	
+		// recursive call
+		return new QRPolynomial(num, 0).mod(e);
+	}
+};
+
+module.exports = QRPolynomial;
+
+},
+"./QRRSBlock": function(module, exports, require) {
+var QRErrorCorrectLevel = require('./QRErrorCorrectLevel');
+
+function QRRSBlock(totalCount, dataCount) {
+	this.totalCount = totalCount;
+	this.dataCount  = dataCount;
+}
+
+QRRSBlock.RS_BLOCK_TABLE = [
+
+	// L
+	// M
+	// Q
+	// H
+
+	// 1
+	[1, 26, 19],
+	[1, 26, 16],
+	[1, 26, 13],
+	[1, 26, 9],
+	
+	// 2
+	[1, 44, 34],
+	[1, 44, 28],
+	[1, 44, 22],
+	[1, 44, 16],
+
+	// 3
+	[1, 70, 55],
+	[1, 70, 44],
+	[2, 35, 17],
+	[2, 35, 13],
+
+	// 4		
+	[1, 100, 80],
+	[2, 50, 32],
+	[2, 50, 24],
+	[4, 25, 9],
+	
+	// 5
+	[1, 134, 108],
+	[2, 67, 43],
+	[2, 33, 15, 2, 34, 16],
+	[2, 33, 11, 2, 34, 12],
+	
+	// 6
+	[2, 86, 68],
+	[4, 43, 27],
+	[4, 43, 19],
+	[4, 43, 15],
+	
+	// 7		
+	[2, 98, 78],
+	[4, 49, 31],
+	[2, 32, 14, 4, 33, 15],
+	[4, 39, 13, 1, 40, 14],
+	
+	// 8
+	[2, 121, 97],
+	[2, 60, 38, 2, 61, 39],
+	[4, 40, 18, 2, 41, 19],
+	[4, 40, 14, 2, 41, 15],
+	
+	// 9
+	[2, 146, 116],
+	[3, 58, 36, 2, 59, 37],
+	[4, 36, 16, 4, 37, 17],
+	[4, 36, 12, 4, 37, 13],
+	
+	// 10		
+	[2, 86, 68, 2, 87, 69],
+	[4, 69, 43, 1, 70, 44],
+	[6, 43, 19, 2, 44, 20],
+	[6, 43, 15, 2, 44, 16],
+
+	// 11
+	[4, 101, 81],
+	[1, 80, 50, 4, 81, 51],
+	[4, 50, 22, 4, 51, 23],
+	[3, 36, 12, 8, 37, 13],
+
+	// 12
+	[2, 116, 92, 2, 117, 93],
+	[6, 58, 36, 2, 59, 37],
+	[4, 46, 20, 6, 47, 21],
+	[7, 42, 14, 4, 43, 15],
+
+	// 13
+	[4, 133, 107],
+	[8, 59, 37, 1, 60, 38],
+	[8, 44, 20, 4, 45, 21],
+	[12, 33, 11, 4, 34, 12],
+
+	// 14
+	[3, 145, 115, 1, 146, 116],
+	[4, 64, 40, 5, 65, 41],
+	[11, 36, 16, 5, 37, 17],
+	[11, 36, 12, 5, 37, 13],
+
+	// 15
+	[5, 109, 87, 1, 110, 88],
+	[5, 65, 41, 5, 66, 42],
+	[5, 54, 24, 7, 55, 25],
+	[11, 36, 12],
+
+	// 16
+	[5, 122, 98, 1, 123, 99],
+	[7, 73, 45, 3, 74, 46],
+	[15, 43, 19, 2, 44, 20],
+	[3, 45, 15, 13, 46, 16],
+
+	// 17
+	[1, 135, 107, 5, 136, 108],
+	[10, 74, 46, 1, 75, 47],
+	[1, 50, 22, 15, 51, 23],
+	[2, 42, 14, 17, 43, 15],
+
+	// 18
+	[5, 150, 120, 1, 151, 121],
+	[9, 69, 43, 4, 70, 44],
+	[17, 50, 22, 1, 51, 23],
+	[2, 42, 14, 19, 43, 15],
+
+	// 19
+	[3, 141, 113, 4, 142, 114],
+	[3, 70, 44, 11, 71, 45],
+	[17, 47, 21, 4, 48, 22],
+	[9, 39, 13, 16, 40, 14],
+
+	// 20
+	[3, 135, 107, 5, 136, 108],
+	[3, 67, 41, 13, 68, 42],
+	[15, 54, 24, 5, 55, 25],
+	[15, 43, 15, 10, 44, 16],
+
+	// 21
+	[4, 144, 116, 4, 145, 117],
+	[17, 68, 42],
+	[17, 50, 22, 6, 51, 23],
+	[19, 46, 16, 6, 47, 17],
+
+	// 22
+	[2, 139, 111, 7, 140, 112],
+	[17, 74, 46],
+	[7, 54, 24, 16, 55, 25],
+	[34, 37, 13],
+
+	// 23
+	[4, 151, 121, 5, 152, 122],
+	[4, 75, 47, 14, 76, 48],
+	[11, 54, 24, 14, 55, 25],
+	[16, 45, 15, 14, 46, 16],
+
+	// 24
+	[6, 147, 117, 4, 148, 118],
+	[6, 73, 45, 14, 74, 46],
+	[11, 54, 24, 16, 55, 25],
+	[30, 46, 16, 2, 47, 17],
+
+	// 25
+	[8, 132, 106, 4, 133, 107],
+	[8, 75, 47, 13, 76, 48],
+	[7, 54, 24, 22, 55, 25],
+	[22, 45, 15, 13, 46, 16],
+
+	// 26
+	[10, 142, 114, 2, 143, 115],
+	[19, 74, 46, 4, 75, 47],
+	[28, 50, 22, 6, 51, 23],
+	[33, 46, 16, 4, 47, 17],
+
+	// 27
+	[8, 152, 122, 4, 153, 123],
+	[22, 73, 45, 3, 74, 46],
+	[8, 53, 23, 26, 54, 24],
+	[12, 45, 15, 28, 46, 16],
+
+	// 28
+	[3, 147, 117, 10, 148, 118],
+	[3, 73, 45, 23, 74, 46],
+	[4, 54, 24, 31, 55, 25],
+	[11, 45, 15, 31, 46, 16],
+
+	// 29
+	[7, 146, 116, 7, 147, 117],
+	[21, 73, 45, 7, 74, 46],
+	[1, 53, 23, 37, 54, 24],
+	[19, 45, 15, 26, 46, 16],
+
+	// 30
+	[5, 145, 115, 10, 146, 116],
+	[19, 75, 47, 10, 76, 48],
+	[15, 54, 24, 25, 55, 25],
+	[23, 45, 15, 25, 46, 16],
+
+	// 31
+	[13, 145, 115, 3, 146, 116],
+	[2, 74, 46, 29, 75, 47],
+	[42, 54, 24, 1, 55, 25],
+	[23, 45, 15, 28, 46, 16],
+
+	// 32
+	[17, 145, 115],
+	[10, 74, 46, 23, 75, 47],
+	[10, 54, 24, 35, 55, 25],
+	[19, 45, 15, 35, 46, 16],
+
+	// 33
+	[17, 145, 115, 1, 146, 116],
+	[14, 74, 46, 21, 75, 47],
+	[29, 54, 24, 19, 55, 25],
+	[11, 45, 15, 46, 46, 16],
+
+	// 34
+	[13, 145, 115, 6, 146, 116],
+	[14, 74, 46, 23, 75, 47],
+	[44, 54, 24, 7, 55, 25],
+	[59, 46, 16, 1, 47, 17],
+
+	// 35
+	[12, 151, 121, 7, 152, 122],
+	[12, 75, 47, 26, 76, 48],
+	[39, 54, 24, 14, 55, 25],
+	[22, 45, 15, 41, 46, 16],
+
+	// 36
+	[6, 151, 121, 14, 152, 122],
+	[6, 75, 47, 34, 76, 48],
+	[46, 54, 24, 10, 55, 25],
+	[2, 45, 15, 64, 46, 16],
+
+	// 37
+	[17, 152, 122, 4, 153, 123],
+	[29, 74, 46, 14, 75, 47],
+	[49, 54, 24, 10, 55, 25],
+	[24, 45, 15, 46, 46, 16],
+
+	// 38
+	[4, 152, 122, 18, 153, 123],
+	[13, 74, 46, 32, 75, 47],
+	[48, 54, 24, 14, 55, 25],
+	[42, 45, 15, 32, 46, 16],
+
+	// 39
+	[20, 147, 117, 4, 148, 118],
+	[40, 75, 47, 7, 76, 48],
+	[43, 54, 24, 22, 55, 25],
+	[10, 45, 15, 67, 46, 16],
+
+	// 40
+	[19, 148, 118, 6, 149, 119],
+	[18, 75, 47, 31, 76, 48],
+	[34, 54, 24, 34, 55, 25],
+	[20, 45, 15, 61, 46, 16]
+];
+
+QRRSBlock.getRSBlocks = function(typeNumber, errorCorrectLevel) {
+	
+	var rsBlock = QRRSBlock.getRsBlockTable(typeNumber, errorCorrectLevel);
+	
+	if (rsBlock === undefined) {
+		throw new Error("bad rs block @ typeNumber:" + typeNumber + "/errorCorrectLevel:" + errorCorrectLevel);
+	}
+
+	var length = rsBlock.length / 3;
+	
+	var list = [];
+	
+	for (var i = 0; i < length; i++) {
+
+		var count = rsBlock[i * 3 + 0];
+		var totalCount = rsBlock[i * 3 + 1];
+		var dataCount  = rsBlock[i * 3 + 2];
+
+		for (var j = 0; j < count; j++) {
+			list.push(new QRRSBlock(totalCount, dataCount) );	
+		}
+	}
+	
+	return list;
+};
+
+QRRSBlock.getRsBlockTable = function(typeNumber, errorCorrectLevel) {
+
+	switch(errorCorrectLevel) {
+	case QRErrorCorrectLevel.L :
+		return QRRSBlock.RS_BLOCK_TABLE[(typeNumber - 1) * 4 + 0];
+	case QRErrorCorrectLevel.M :
+		return QRRSBlock.RS_BLOCK_TABLE[(typeNumber - 1) * 4 + 1];
+	case QRErrorCorrectLevel.Q :
+		return QRRSBlock.RS_BLOCK_TABLE[(typeNumber - 1) * 4 + 2];
+	case QRErrorCorrectLevel.H :
+		return QRRSBlock.RS_BLOCK_TABLE[(typeNumber - 1) * 4 + 3];
+	default :
+		return undefined;
+	}
+};
+
+module.exports = QRRSBlock;
+
+},
+"./QRUtil": function(module, exports, require) {
+var QRMode = require('./QRMode');
+var QRPolynomial = require('./QRPolynomial');
+var QRMath = require('./QRMath');
+var QRMaskPattern = require('./QRMaskPattern');
+
+var QRUtil = {
+
+    PATTERN_POSITION_TABLE : [
+        [],
+        [6, 18],
+        [6, 22],
+        [6, 26],
+        [6, 30],
+        [6, 34],
+        [6, 22, 38],
+        [6, 24, 42],
+        [6, 26, 46],
+        [6, 28, 50],
+        [6, 30, 54],        
+        [6, 32, 58],
+        [6, 34, 62],
+        [6, 26, 46, 66],
+        [6, 26, 48, 70],
+        [6, 26, 50, 74],
+        [6, 30, 54, 78],
+        [6, 30, 56, 82],
+        [6, 30, 58, 86],
+        [6, 34, 62, 90],
+        [6, 28, 50, 72, 94],
+        [6, 26, 50, 74, 98],
+        [6, 30, 54, 78, 102],
+        [6, 28, 54, 80, 106],
+        [6, 32, 58, 84, 110],
+        [6, 30, 58, 86, 114],
+        [6, 34, 62, 90, 118],
+        [6, 26, 50, 74, 98, 122],
+        [6, 30, 54, 78, 102, 126],
+        [6, 26, 52, 78, 104, 130],
+        [6, 30, 56, 82, 108, 134],
+        [6, 34, 60, 86, 112, 138],
+        [6, 30, 58, 86, 114, 142],
+        [6, 34, 62, 90, 118, 146],
+        [6, 30, 54, 78, 102, 126, 150],
+        [6, 24, 50, 76, 102, 128, 154],
+        [6, 28, 54, 80, 106, 132, 158],
+        [6, 32, 58, 84, 110, 136, 162],
+        [6, 26, 54, 82, 110, 138, 166],
+        [6, 30, 58, 86, 114, 142, 170]
+    ],
+
+    G15 : (1 << 10) | (1 << 8) | (1 << 5) | (1 << 4) | (1 << 2) | (1 << 1) | (1 << 0),
+    G18 : (1 << 12) | (1 << 11) | (1 << 10) | (1 << 9) | (1 << 8) | (1 << 5) | (1 << 2) | (1 << 0),
+    G15_MASK : (1 << 14) | (1 << 12) | (1 << 10)    | (1 << 4) | (1 << 1),
+
+    getBCHTypeInfo : function(data) {
+        var d = data << 10;
+        while (QRUtil.getBCHDigit(d) - QRUtil.getBCHDigit(QRUtil.G15) >= 0) {
+            d ^= (QRUtil.G15 << (QRUtil.getBCHDigit(d) - QRUtil.getBCHDigit(QRUtil.G15) ) );    
+        }
+        return ( (data << 10) | d) ^ QRUtil.G15_MASK;
+    },
+
+    getBCHTypeNumber : function(data) {
+        var d = data << 12;
+        while (QRUtil.getBCHDigit(d) - QRUtil.getBCHDigit(QRUtil.G18) >= 0) {
+            d ^= (QRUtil.G18 << (QRUtil.getBCHDigit(d) - QRUtil.getBCHDigit(QRUtil.G18) ) );    
+        }
+        return (data << 12) | d;
+    },
+
+    getBCHDigit : function(data) {
+
+        var digit = 0;
+
+        while (data !== 0) {
+            digit++;
+            data >>>= 1;
+        }
+
+        return digit;
+    },
+
+    getPatternPosition : function(typeNumber) {
+        return QRUtil.PATTERN_POSITION_TABLE[typeNumber - 1];
+    },
+
+    getMask : function(maskPattern, i, j) {
+        
+        switch (maskPattern) {
+            
+        case QRMaskPattern.PATTERN000 : return (i + j) % 2 === 0;
+        case QRMaskPattern.PATTERN001 : return i % 2 === 0;
+        case QRMaskPattern.PATTERN010 : return j % 3 === 0;
+        case QRMaskPattern.PATTERN011 : return (i + j) % 3 === 0;
+        case QRMaskPattern.PATTERN100 : return (Math.floor(i / 2) + Math.floor(j / 3) ) % 2 === 0;
+        case QRMaskPattern.PATTERN101 : return (i * j) % 2 + (i * j) % 3 === 0;
+        case QRMaskPattern.PATTERN110 : return ( (i * j) % 2 + (i * j) % 3) % 2 === 0;
+        case QRMaskPattern.PATTERN111 : return ( (i * j) % 3 + (i + j) % 2) % 2 === 0;
+
+        default :
+            throw new Error("bad maskPattern:" + maskPattern);
+        }
+    },
+
+    getErrorCorrectPolynomial : function(errorCorrectLength) {
+
+        var a = new QRPolynomial([1], 0);
+
+        for (var i = 0; i < errorCorrectLength; i++) {
+            a = a.multiply(new QRPolynomial([1, QRMath.gexp(i)], 0) );
+        }
+
+        return a;
+    },
+
+    getLengthInBits : function(mode, type) {
+
+        if (1 <= type && type < 10) {
+
+            // 1 - 9
+
+            switch(mode) {
+            case QRMode.MODE_NUMBER     : return 10;
+            case QRMode.MODE_ALPHA_NUM  : return 9;
+            case QRMode.MODE_8BIT_BYTE  : return 8;
+            case QRMode.MODE_KANJI      : return 8;
+            default :
+                throw new Error("mode:" + mode);
+            }
+
+        } else if (type < 27) {
+
+            // 10 - 26
+
+            switch(mode) {
+            case QRMode.MODE_NUMBER     : return 12;
+            case QRMode.MODE_ALPHA_NUM  : return 11;
+            case QRMode.MODE_8BIT_BYTE  : return 16;
+            case QRMode.MODE_KANJI      : return 10;
+            default :
+                throw new Error("mode:" + mode);
+            }
+
+        } else if (type < 41) {
+
+            // 27 - 40
+
+            switch(mode) {
+            case QRMode.MODE_NUMBER     : return 14;
+            case QRMode.MODE_ALPHA_NUM  : return 13;
+            case QRMode.MODE_8BIT_BYTE  : return 16;
+            case QRMode.MODE_KANJI      : return 12;
+            default :
+                throw new Error("mode:" + mode);
+            }
+
+        } else {
+            throw new Error("type:" + type);
+        }
+    },
+
+    getLostPoint : function(qrCode) {
+        
+        var moduleCount = qrCode.getModuleCount();
+        var lostPoint = 0;
+        var row = 0; 
+        var col = 0;
+
+        
+        // LEVEL1
+        
+        for (row = 0; row < moduleCount; row++) {
+
+            for (col = 0; col < moduleCount; col++) {
+
+                var sameCount = 0;
+                var dark = qrCode.isDark(row, col);
+
+                for (var r = -1; r <= 1; r++) {
+
+                    if (row + r < 0 || moduleCount <= row + r) {
+                        continue;
+                    }
+
+                    for (var c = -1; c <= 1; c++) {
+
+                        if (col + c < 0 || moduleCount <= col + c) {
+                            continue;
+                        }
+
+                        if (r === 0 && c === 0) {
+                            continue;
+                        }
+
+                        if (dark === qrCode.isDark(row + r, col + c) ) {
+                            sameCount++;
+                        }
+                    }
+                }
+
+                if (sameCount > 5) {
+                    lostPoint += (3 + sameCount - 5);
+                }
+            }
+        }
+
+        // LEVEL2
+
+        for (row = 0; row < moduleCount - 1; row++) {
+            for (col = 0; col < moduleCount - 1; col++) {
+                var count = 0;
+                if (qrCode.isDark(row,     col    ) ) count++;
+                if (qrCode.isDark(row + 1, col    ) ) count++;
+                if (qrCode.isDark(row,     col + 1) ) count++;
+                if (qrCode.isDark(row + 1, col + 1) ) count++;
+                if (count === 0 || count === 4) {
+                    lostPoint += 3;
+                }
+            }
+        }
+
+        // LEVEL3
+
+        for (row = 0; row < moduleCount; row++) {
+            for (col = 0; col < moduleCount - 6; col++) {
+                if (qrCode.isDark(row, col) && 
+                        !qrCode.isDark(row, col + 1) && 
+                         qrCode.isDark(row, col + 2) && 
+                         qrCode.isDark(row, col + 3) && 
+                         qrCode.isDark(row, col + 4) && 
+                        !qrCode.isDark(row, col + 5) && 
+                         qrCode.isDark(row, col + 6) ) {
+                    lostPoint += 40;
+                }
+            }
+        }
+
+        for (col = 0; col < moduleCount; col++) {
+            for (row = 0; row < moduleCount - 6; row++) {
+                if (qrCode.isDark(row, col) &&
+                        !qrCode.isDark(row + 1, col) &&
+                         qrCode.isDark(row + 2, col) &&
+                         qrCode.isDark(row + 3, col) &&
+                         qrCode.isDark(row + 4, col) &&
+                        !qrCode.isDark(row + 5, col) &&
+                         qrCode.isDark(row + 6, col) ) {
+                    lostPoint += 40;
+                }
+            }
+        }
+
+        // LEVEL4
+        
+        var darkCount = 0;
+
+        for (col = 0; col < moduleCount; col++) {
+            for (row = 0; row < moduleCount; row++) {
+                if (qrCode.isDark(row, col) ) {
+                    darkCount++;
+                }
+            }
+        }
+        
+        var ratio = Math.abs(100 * darkCount / moduleCount / moduleCount - 50) / 5;
+        lostPoint += ratio * 10;
+
+        return lostPoint;       
+    }
+
+};
+
+module.exports = QRUtil;
+
+},
+"./index": function(module, exports, require) {
+//---------------------------------------------------------------------
+// QRCode for JavaScript
+//
+// Copyright (c) 2009 Kazuhiko Arase
+//
+// URL: http://www.d-project.com/
+//
+// Licensed under the MIT license:
+//   http://www.opensource.org/licenses/mit-license.php
+//
+// The word "QR Code" is registered trademark of 
+// DENSO WAVE INCORPORATED
+//   http://www.denso-wave.com/qrcode/faqpatent-e.html
+//
+//---------------------------------------------------------------------
+// Modified to work in node for this project (and some refactoring)
+//---------------------------------------------------------------------
+
+var QR8bitByte = require('./QR8bitByte');
+var QRUtil = require('./QRUtil');
+var QRPolynomial = require('./QRPolynomial');
+var QRRSBlock = require('./QRRSBlock');
+var QRBitBuffer = require('./QRBitBuffer');
+
+function QRCode(typeNumber, errorCorrectLevel) {
+	this.typeNumber = typeNumber;
+	this.errorCorrectLevel = errorCorrectLevel;
+	this.modules = null;
+	this.moduleCount = 0;
+	this.dataCache = null;
+	this.dataList = [];
+}
+
+QRCode.prototype = {
+	
+	addData : function(data) {
+		var newData = new QR8bitByte(data);
+		this.dataList.push(newData);
+		this.dataCache = null;
+	},
+	
+	isDark : function(row, col) {
+		if (row < 0 || this.moduleCount <= row || col < 0 || this.moduleCount <= col) {
+			throw new Error(row + "," + col);
+		}
+		return this.modules[row][col];
+	},
+
+	getModuleCount : function() {
+		return this.moduleCount;
+	},
+	
+	make : function() {
+		// Calculate automatically typeNumber if provided is < 1
+		if (this.typeNumber < 1 ){
+			var typeNumber = 1;
+			for (typeNumber = 1; typeNumber < 40; typeNumber++) {
+				var rsBlocks = QRRSBlock.getRSBlocks(typeNumber, this.errorCorrectLevel);
+
+				var buffer = new QRBitBuffer();
+				var totalDataCount = 0;
+				for (var i = 0; i < rsBlocks.length; i++) {
+					totalDataCount += rsBlocks[i].dataCount;
+				}
+
+				for (var x = 0; x < this.dataList.length; x++) {
+					var data = this.dataList[x];
+					buffer.put(data.mode, 4);
+					buffer.put(data.getLength(), QRUtil.getLengthInBits(data.mode, typeNumber) );
+					data.write(buffer);
+				}
+				if (buffer.getLengthInBits() <= totalDataCount * 8)
+					break;
+			}
+			this.typeNumber = typeNumber;
+		}
+		this.makeImpl(false, this.getBestMaskPattern() );
+	},
+	
+	makeImpl : function(test, maskPattern) {
+		
+		this.moduleCount = this.typeNumber * 4 + 17;
+		this.modules = new Array(this.moduleCount);
+		
+		for (var row = 0; row < this.moduleCount; row++) {
+			
+			this.modules[row] = new Array(this.moduleCount);
+			
+			for (var col = 0; col < this.moduleCount; col++) {
+				this.modules[row][col] = null;//(col + row) % 3;
+			}
+		}
+	
+		this.setupPositionProbePattern(0, 0);
+		this.setupPositionProbePattern(this.moduleCount - 7, 0);
+		this.setupPositionProbePattern(0, this.moduleCount - 7);
+		this.setupPositionAdjustPattern();
+		this.setupTimingPattern();
+		this.setupTypeInfo(test, maskPattern);
+		
+		if (this.typeNumber >= 7) {
+			this.setupTypeNumber(test);
+		}
+	
+		if (this.dataCache === null) {
+			this.dataCache = QRCode.createData(this.typeNumber, this.errorCorrectLevel, this.dataList);
+		}
+	
+		this.mapData(this.dataCache, maskPattern);
+	},
+
+	setupPositionProbePattern : function(row, col)  {
+		
+		for (var r = -1; r <= 7; r++) {
+			
+			if (row + r <= -1 || this.moduleCount <= row + r) continue;
+			
+			for (var c = -1; c <= 7; c++) {
+				
+				if (col + c <= -1 || this.moduleCount <= col + c) continue;
+				
+				if ( (0 <= r && r <= 6 && (c === 0 || c === 6) ) || 
+                     (0 <= c && c <= 6 && (r === 0 || r === 6) ) || 
+                     (2 <= r && r <= 4 && 2 <= c && c <= 4) ) {
+					this.modules[row + r][col + c] = true;
+				} else {
+					this.modules[row + r][col + c] = false;
+				}
+			}		
+		}		
+	},
+	
+	getBestMaskPattern : function() {
+	
+		var minLostPoint = 0;
+		var pattern = 0;
+	
+		for (var i = 0; i < 8; i++) {
+			
+			this.makeImpl(true, i);
+	
+			var lostPoint = QRUtil.getLostPoint(this);
+	
+			if (i === 0 || minLostPoint >  lostPoint) {
+				minLostPoint = lostPoint;
+				pattern = i;
+			}
+		}
+	
+		return pattern;
+	},
+	
+	createMovieClip : function(target_mc, instance_name, depth) {
+	
+		var qr_mc = target_mc.createEmptyMovieClip(instance_name, depth);
+		var cs = 1;
+	
+		this.make();
+
+		for (var row = 0; row < this.modules.length; row++) {
+			
+			var y = row * cs;
+			
+			for (var col = 0; col < this.modules[row].length; col++) {
+	
+				var x = col * cs;
+				var dark = this.modules[row][col];
+			
+				if (dark) {
+					qr_mc.beginFill(0, 100);
+					qr_mc.moveTo(x, y);
+					qr_mc.lineTo(x + cs, y);
+					qr_mc.lineTo(x + cs, y + cs);
+					qr_mc.lineTo(x, y + cs);
+					qr_mc.endFill();
+				}
+			}
+		}
+		
+		return qr_mc;
+	},
+
+	setupTimingPattern : function() {
+		
+		for (var r = 8; r < this.moduleCount - 8; r++) {
+			if (this.modules[r][6] !== null) {
+				continue;
+			}
+			this.modules[r][6] = (r % 2 === 0);
+		}
+	
+		for (var c = 8; c < this.moduleCount - 8; c++) {
+			if (this.modules[6][c] !== null) {
+				continue;
+			}
+			this.modules[6][c] = (c % 2 === 0);
+		}
+	},
+	
+	setupPositionAdjustPattern : function() {
+	
+		var pos = QRUtil.getPatternPosition(this.typeNumber);
+		
+		for (var i = 0; i < pos.length; i++) {
+		
+			for (var j = 0; j < pos.length; j++) {
+			
+				var row = pos[i];
+				var col = pos[j];
+				
+				if (this.modules[row][col] !== null) {
+					continue;
+				}
+				
+				for (var r = -2; r <= 2; r++) {
+				
+					for (var c = -2; c <= 2; c++) {
+					
+						if (Math.abs(r) === 2 || 
+                            Math.abs(c) === 2 ||
+                            (r === 0 && c === 0) ) {
+							this.modules[row + r][col + c] = true;
+						} else {
+							this.modules[row + r][col + c] = false;
+						}
+					}
+				}
+			}
+		}
+	},
+	
+	setupTypeNumber : function(test) {
+	
+		var bits = QRUtil.getBCHTypeNumber(this.typeNumber);
+        var mod;
+	
+		for (var i = 0; i < 18; i++) {
+			mod = (!test && ( (bits >> i) & 1) === 1);
+			this.modules[Math.floor(i / 3)][i % 3 + this.moduleCount - 8 - 3] = mod;
+		}
+	
+		for (var x = 0; x < 18; x++) {
+			mod = (!test && ( (bits >> x) & 1) === 1);
+			this.modules[x % 3 + this.moduleCount - 8 - 3][Math.floor(x / 3)] = mod;
+		}
+	},
+	
+	setupTypeInfo : function(test, maskPattern) {
+	
+		var data = (this.errorCorrectLevel << 3) | maskPattern;
+		var bits = QRUtil.getBCHTypeInfo(data);
+        var mod;
+	
+		// vertical		
+		for (var v = 0; v < 15; v++) {
+	
+			mod = (!test && ( (bits >> v) & 1) === 1);
+	
+			if (v < 6) {
+				this.modules[v][8] = mod;
+			} else if (v < 8) {
+				this.modules[v + 1][8] = mod;
+			} else {
+				this.modules[this.moduleCount - 15 + v][8] = mod;
+			}
+		}
+	
+		// horizontal
+		for (var h = 0; h < 15; h++) {
+	
+			mod = (!test && ( (bits >> h) & 1) === 1);
+			
+			if (h < 8) {
+				this.modules[8][this.moduleCount - h - 1] = mod;
+			} else if (h < 9) {
+				this.modules[8][15 - h - 1 + 1] = mod;
+			} else {
+				this.modules[8][15 - h - 1] = mod;
+			}
+		}
+	
+		// fixed module
+		this.modules[this.moduleCount - 8][8] = (!test);
+	
+	},
+	
+	mapData : function(data, maskPattern) {
+		
+		var inc = -1;
+		var row = this.moduleCount - 1;
+		var bitIndex = 7;
+		var byteIndex = 0;
+		
+		for (var col = this.moduleCount - 1; col > 0; col -= 2) {
+	
+			if (col === 6) col--;
+	
+			while (true) {
+	
+				for (var c = 0; c < 2; c++) {
+					
+					if (this.modules[row][col - c] === null) {
+						
+						var dark = false;
+	
+						if (byteIndex < data.length) {
+							dark = ( ( (data[byteIndex] >>> bitIndex) & 1) === 1);
+						}
+	
+						var mask = QRUtil.getMask(maskPattern, row, col - c);
+	
+						if (mask) {
+							dark = !dark;
+						}
+						
+						this.modules[row][col - c] = dark;
+						bitIndex--;
+	
+						if (bitIndex === -1) {
+							byteIndex++;
+							bitIndex = 7;
+						}
+					}
+				}
+								
+				row += inc;
+	
+				if (row < 0 || this.moduleCount <= row) {
+					row -= inc;
+					inc = -inc;
+					break;
+				}
+			}
+		}
+		
+	}
+
+};
+
+QRCode.PAD0 = 0xEC;
+QRCode.PAD1 = 0x11;
+
+QRCode.createData = function(typeNumber, errorCorrectLevel, dataList) {
+	
+	var rsBlocks = QRRSBlock.getRSBlocks(typeNumber, errorCorrectLevel);
+	
+	var buffer = new QRBitBuffer();
+	
+	for (var i = 0; i < dataList.length; i++) {
+		var data = dataList[i];
+		buffer.put(data.mode, 4);
+		buffer.put(data.getLength(), QRUtil.getLengthInBits(data.mode, typeNumber) );
+		data.write(buffer);
+	}
+
+	// calc num max data.
+	var totalDataCount = 0;
+	for (var x = 0; x < rsBlocks.length; x++) {
+		totalDataCount += rsBlocks[x].dataCount;
+	}
+
+	if (buffer.getLengthInBits() > totalDataCount * 8) {
+		throw new Error("code length overflow. (" + 
+            buffer.getLengthInBits() + 
+            ">" +  
+            totalDataCount * 8 + 
+            ")");
+	}
+
+	// end code
+	if (buffer.getLengthInBits() + 4 <= totalDataCount * 8) {
+		buffer.put(0, 4);
+	}
+
+	// padding
+	while (buffer.getLengthInBits() % 8 !== 0) {
+		buffer.putBit(false);
+	}
+
+	// padding
+	while (true) {
+		
+		if (buffer.getLengthInBits() >= totalDataCount * 8) {
+			break;
+		}
+		buffer.put(QRCode.PAD0, 8);
+		
+		if (buffer.getLengthInBits() >= totalDataCount * 8) {
+			break;
+		}
+		buffer.put(QRCode.PAD1, 8);
+	}
+
+	return QRCode.createBytes(buffer, rsBlocks);
+};
+
+QRCode.createBytes = function(buffer, rsBlocks) {
+
+	var offset = 0;
+	
+	var maxDcCount = 0;
+	var maxEcCount = 0;
+	
+	var dcdata = new Array(rsBlocks.length);
+	var ecdata = new Array(rsBlocks.length);
+	
+	for (var r = 0; r < rsBlocks.length; r++) {
+
+		var dcCount = rsBlocks[r].dataCount;
+		var ecCount = rsBlocks[r].totalCount - dcCount;
+
+		maxDcCount = Math.max(maxDcCount, dcCount);
+		maxEcCount = Math.max(maxEcCount, ecCount);
+		
+		dcdata[r] = new Array(dcCount);
+		
+		for (var i = 0; i < dcdata[r].length; i++) {
+			dcdata[r][i] = 0xff & buffer.buffer[i + offset];
+		}
+		offset += dcCount;
+		
+		var rsPoly = QRUtil.getErrorCorrectPolynomial(ecCount);
+		var rawPoly = new QRPolynomial(dcdata[r], rsPoly.getLength() - 1);
+
+		var modPoly = rawPoly.mod(rsPoly);
+		ecdata[r] = new Array(rsPoly.getLength() - 1);
+		for (var x = 0; x < ecdata[r].length; x++) {
+            var modIndex = x + modPoly.getLength() - ecdata[r].length;
+			ecdata[r][x] = (modIndex >= 0)? modPoly.get(modIndex) : 0;
+		}
+
+	}
+	
+	var totalCodeCount = 0;
+	for (var y = 0; y < rsBlocks.length; y++) {
+		totalCodeCount += rsBlocks[y].totalCount;
+	}
+
+	var data = new Array(totalCodeCount);
+	var index = 0;
+
+	for (var z = 0; z < maxDcCount; z++) {
+		for (var s = 0; s < rsBlocks.length; s++) {
+			if (z < dcdata[s].length) {
+				data[index++] = dcdata[s][z];
+			}
+		}
+	}
+
+	for (var xx = 0; xx < maxEcCount; xx++) {
+		for (var t = 0; t < rsBlocks.length; t++) {
+			if (xx < ecdata[t].length) {
+				data[index++] = ecdata[t][xx];
+			}
+		}
+	}
+
+	return data;
+
+};
+
+module.exports = QRCode;
+
+}};
+  const cache={};
+  function require(name){
+    if(cache[name])return cache[name].exports;
+    if(!modules[name])throw Error('QR module not found: '+name);
+    const module={exports:{}};cache[name]=module;modules[name](module,module.exports,require);return module.exports;
+  }
+  return require('./index');
+})();
+
+</script>
+<script>
+(() => {
+'use strict';
+const app = document.getElementById('main-content');
+const cloned = v => JSON.parse(JSON.stringify(v));
+const esc = v => String(v ?? '').replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
+const dateStamp = () => new Date().toLocaleString('en-GB',{dateStyle:'medium',timeStyle:'short'});
+const u = {a11y:'https://standards.education.gov.uk/standard/accessibility-conformance',statement:'https://standards.education.gov.uk/standard/accessibility-statements',data:'https://standards.education.gov.uk/standard/data-classification',ico:'https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/accountability-and-governance/data-protection-impact-assessments-dpias/when-do-we-need-to-do-a-dpia/',service:'https://apply-the-service-standard.education.gov.uk/guides/service-assessments',manual:'https://www.gov.uk/service-manual',technology:'https://www.gov.uk/guidance/the-technology-code-of-practice'};
+const no='unknown';
+const fieldsInfo = [
+ {id:'kind',label:'What type of work is this?',hint:'Select the closest description. This can change during triage.',opts:[['transactional','Transactional service'],['information','Information or campaign site'],['report','Report or internal analysis'],['api','API or data exchange'],['internal','Internal case management or operational system'],['purchase','Software or SaaS procurement'],['unknown','Not yet known']]},
+ {id:'change',label:'Is this new work or a change to something live?',opts:[['new','New work'],['material','Material change to a live product or service'],['minor','Minor change to existing work'],['unknown','Not yet known']]},
+ {id:'audience',label:'Who will use it?',opts:[['public','Members of the public or parents'],['providers','Schools, colleges or other education providers'],['staff','DfE or other government staff'],['mixed','More than one user group'],['none','No direct end users'],['unknown','Not yet known']]},
+ {id:'browser',label:'Will people use it through a website or browser?',opts:[['yes','Yes'],['no','No'],['unknown','Not yet known']]},
+ {id:'transaction',label:'Will people submit information or complete a transaction?',opts:[['yes','Yes'],['no','No'],['unknown','Not yet known']]},
+ {id:'yearly',label:'How many transactions do you expect each year?',opts:[['under','Fewer than 100,000'],['over','100,000 or more'],['na','Not applicable'],['unknown','Not yet known']]},
+ {id:'identity',label:'Will users need to sign in?',opts:[['yes','Yes'],['no','No'],['unknown','Not yet known']]},
+ {id:'stage',label:'What stage is the work at?',opts:[['Idea','Idea'],['Understand','Understand'],['Design and Test','Design and Test'],['Build','Build'],['Run','Run'],['Improve','Improve'],['Decommission','Decommission']]}
+];
+const fieldsRisk = [
+ {id:'personal',label:'Will the work collect, use or share personal data?',hint:'Personal data means information relating to an identified or identifiable person.',opts:[['yes','Yes'],['no','No'],['unknown','Not yet known']]},
+ {id:'special',label:'Will it use special category or criminal offence data?',hint:'For example health information, religion, biometric data used for identification or criminal offence data. This is not the same as all protected characteristics.',opts:[['yes','Yes'],['no','No'],['unknown','Not yet known']]},
+ {id:'children',label:'Will it process information about children or potentially vulnerable people?',opts:[['yes','Yes'],['no','No'],['unknown','Not yet known']]},
+ {id:'highRisk',label:'Could the planned processing be likely to result in a high risk to people?',hint:'For example large-scale sensitive processing, significant automated decisions or systematic monitoring. A specialist should confirm the determination.',opts:[['yes','Yes, potentially high risk'],['no','No identified high-risk factors'],['unknown','Not yet known']]},
+ {id:'sharing',label:'Will data be shared with another organisation or supplier?',opts:[['yes','Yes'],['no','No'],['unknown','Not yet known']]},
+ {id:'supplier',label:'Will a third-party supplier host, build or operate any part of this?',opts:[['yes','Yes'],['no','No'],['unknown','Not yet known']]},
+ {id:'login',label:'Will it need a new authentication or identity integration?',opts:[['yes','Yes'],['no','No'],['unknown','Not yet known']]},
+ {id:'goingLive',label:'Is it preparing to go live or materially change a live service?',opts:[['yes','Yes'],['no','No'],['unknown','Not yet known']]}
+];
+const allFields=[...fieldsInfo,...fieldsRisk];
+const examples=[
+ {id:'grant',ref:'WORK-0184',name:'Apply for a school transport grant',source:'Policy business case',description:'A proposed public-facing grant application. Parents submit personal information to apply for financial support.',f:{kind:'transactional',change:'new',audience:'public',browser:'yes',transaction:'yes',yearly:'under',identity:'yes',stage:'Understand',personal:'yes',special:'no',children:'yes',highRisk:'unknown',sharing:'no',supplier:'no',login:'yes',goingLive:'no'}},
+ {id:'campaign',ref:'WORK-0193',name:'School attendance information website',source:'Service improvement request',description:'A live website with attendance guidance. Try changing it to include an application journey that collects personal data.',f:{kind:'information',change:'minor',audience:'public',browser:'yes',transaction:'no',yearly:'na',identity:'no',stage:'Run',personal:'no',special:'no',children:'no',highRisk:'no',sharing:'no',supplier:'no',login:'no',goingLive:'no'}},
+ {id:'report',ref:'WORK-0201',name:'Monthly DDT performance report',source:'Central Ops',description:'An internal report using aggregated performance figures, with no personal information or user-facing transactions.',f:{kind:'report',change:'new',audience:'staff',browser:'no',transaction:'no',yearly:'na',identity:'no',stage:'Idea',personal:'no',special:'no',children:'no',highRisk:'no',sharing:'no',supplier:'no',login:'no',goingLive:'no'}},
+ {id:'data',ref:'WORK-0212',name:'Pupil support data-sharing API',source:'Programme demand',description:'An API proposed to exchange individual pupil support records between DfE and another organisation.',f:{kind:'api',change:'new',audience:'none',browser:'no',transaction:'no',yearly:'na',identity:'no',stage:'Design and Test',personal:'yes',special:'yes',children:'yes',highRisk:'yes',sharing:'yes',supplier:'no',login:'no',goingLive:'no'}},
+ {id:'saas',ref:'WORK-0230',name:'Procure a supplier-hosted staff system',source:'Commercial request',description:'A proposed staff system supplied by a third party, with staff accounts and limited employee information.',f:{kind:'purchase',change:'new',audience:'staff',browser:'yes',transaction:'no',yearly:'na',identity:'yes',stage:'Idea',personal:'yes',special:'no',children:'no',highRisk:'unknown',sharing:'yes',supplier:'yes',login:'yes',goingLive:'no'}}
+];
+function seeding(){return {items:Object.fromEntries(examples.map(x=>[x.id,{...cloned(x),runs:[],actions:{},history:[{at:dateStamp(),text:'Fictional Work record created'}]}]))};}
+let data;
+try{data=JSON.parse(sessionStorage.getItem('compass-rules-v2'))||seeding()}catch(_){data=seeding()}
+function save(){try{sessionStorage.setItem('compass-rules-v2',JSON.stringify(data))}catch(_){}}
+function log(w,text){w.history.unshift({at:dateStamp(),text});save()}
+function value(f,key){return f[key]??no}
+function yes(f,key){const v=value(f,key);return v==='unknown'?null:v==='yes'}
+function equals(f,key,v){const x=value(f,key);return x==='unknown'?null:x===v}
+function oneOf(f,key,vs){const x=value(f,key);return x==='unknown'?null:vs.includes(x)}
+function AND(...parts){return parts.includes(false)?false:parts.includes(null)?null:true}
+function OR(...parts){return parts.includes(true)?true:parts.includes(null)?null:false}
+const rules=[
+ {id:'ACC-01',area:'Accessibility',title:'Design and test the product against WCAG 2.2 AA',type:'required',owner:'Product team / Accessibility',when:'Design and Test > Build',source:'DfE Accessibility Conformance (DDTS-463)',url:u.a11y,action:'Plan and complete accessibility testing; record and fix known failures.',evidence:'Accessibility test results, issues and remediation plan',explain:'The work is delivered through a browser.',check:f=>yes(f,'browser')},
+ {id:'ACC-02',area:'Accessibility',title:'Provide an accurate accessibility statement',type:'required',owner:'Product owner / Content design',when:'Before the service is available to users; review at least annually',source:'DfE Accessibility Statements (DDTS-34)',url:u.statement,action:'Confirm scope, publish a statement and include a link from the website footer.',evidence:'Published statement and latest review date',explain:'The work includes a website or browser interface.',check:f=>yes(f,'browser')},
+ {id:'ACC-03',area:'Accessibility',title:'Register the product with AISS',type:'required',owner:'Service owner / Accessibility',when:'During Build; maintain during Run',source:'DfE Accessibility Conformance standard (approved AISS service)',url:u.a11y,action:'Enrol the product in AISS and manage issues and the live statement centrally.',evidence:'AISS product record and issue ownership',explain:'DfE’s accessibility standard identifies AISS as the approved product for centrally managing issues and statements.',check:f=>yes(f,'browser')},
+ {id:'DP-01',area:'Data protection',title:'Complete DPIA screening',type:'required',owner:'Delivery owner / Data Protection',when:'Before processing design is committed',source:'ICO DPIA screening guidance',url:u.ico,action:'Screen the proposed processing for likely high risk and record the decision.',evidence:'Screening decision, rationale and specialist advice',explain:'Personal data will be collected, used or shared. Screening determines whether a full DPIA is needed.',check:f=>yes(f,'personal')},
+ {id:'DP-02',area:'Data protection',title:'Complete a data protection impact assessment',type:'required',owner:'Product owner / Data Protection',when:'Before high-risk processing begins',source:'UK GDPR Article 35 / ICO guidance',url:u.ico,action:'Undertake a DPIA before processing begins and resolve or escalate identified risks.',evidence:'Approved DPIA and agreed mitigations',explain:'Personal data processing is flagged as likely high risk. This must be confirmed and assessed.',check:f=>AND(yes(f,'personal'),yes(f,'highRisk'))},
+ {id:'DP-03',area:'Data protection',title:'Review the conditions for sensitive processing',type:'review',owner:'Data Protection / Information Governance',when:'During Understand',source:'UK GDPR and ICO DPIA guidance',url:u.ico,action:'Confirm applicable Article 6 and Article 9 or Article 10 conditions and additional safeguards.',evidence:'Recorded legal basis and specialist decision',explain:'The work is expected to use special category or criminal offence data.',check:f=>AND(yes(f,'personal'),yes(f,'special'))},
+ {id:'DP-04',area:'Data protection',title:'Check privacy information and records of processing',type:'required',owner:'Data Protection / Product owner',when:'Before information is collected',source:'Data protection obligations / DfE process – verify owner',url:u.ico,action:'Agree lawful basis, privacy information, retention and processing records with Data Protection.',evidence:'Agreed privacy content and processing record',explain:'The work will involve personal data.',check:f=>yes(f,'personal')},
+ {id:'DP-05',area:'Data protection',title:'Review the risks of processing children’s information',type:'review',owner:'Data Protection / User Research',when:'During Understand and Design and Test',source:'ICO DPIA high-risk indicators',url:u.ico,action:'Consider vulnerability, privacy by design and whether high-risk factors require a DPIA.',evidence:'Documented risk screening and mitigation',explain:'The work will involve personal information about children or vulnerable people.',check:f=>AND(yes(f,'personal'),yes(f,'children'))},
+ {id:'DP-06',area:'Data protection',title:'Review the data-sharing arrangements',type:'review',owner:'Data Protection / Information Governance',when:'Before data exchange',source:'DfE data controls / applicable data-sharing requirements',url:u.data,action:'Confirm the purpose, legal arrangements and controls for sharing with another organisation.',evidence:'Sharing decision and relevant agreement or contract',explain:'The work will share data with another organisation or supplier.',check:f=>yes(f,'sharing')},
+ {id:'SEC-01',area:'Security',title:'Classify the data and apply handling controls',type:'required',owner:'Data owner / Security',when:'During Understand',source:'DfE Data Classification standard',url:u.data,action:'Determine data classification and associated access, storage and handling requirements.',evidence:'Data classification and handling decision',explain:'The work will create or handle information or data.',check:f=>oneOf(f,'kind',['report','api','transactional','information','internal','purchase'])},
+ {id:'SEC-02',area:'Security',title:'Carry out security design and risk review',type:'review',owner:'Cyber / Information Security / Architecture',when:'During Understand and before go-live',source:'DfE security processes – owner verification needed',url:u.technology,action:'Confirm threat model, access controls, architecture review and security testing proportionate to the work.',evidence:'Security risk review and approval or recorded treatment',explain:'A new or materially changed digital capability is proposed.',check:f=>AND(oneOf(f,'change',['new','material']),oneOf(f,'kind',['transactional','information','api','internal','purchase']))},
+ {id:'SEC-03',area:'Security',title:'Review supplier and cloud security',type:'review',owner:'Commercial / Cyber / Architecture',when:'Before contract or hosting decision',source:'DfE security and procurement controls – verify',url:u.technology,action:'Review supplier assurance, hosting, data access, resilience and contract requirements.',evidence:'Supplier security assessment and actions',explain:'A third-party supplier will host, build or operate part of the solution.',check:f=>yes(f,'supplier')},
+ {id:'SEC-04',area:'Security',title:'Confirm the approved identity integration',type:'review',owner:'Identity / Architecture / Product',when:'During Design and Test',source:'DfE identity patterns – route to identity team',url:u.technology,action:'Consider GOV.UK One Login for public users, DfE Sign-in for education providers or Entra ID for staff as appropriate.',evidence:'Identity architecture decision',explain:'Users will sign in and a new identity integration is proposed.',check:f=>AND(yes(f,'identity'),yes(f,'login'))},
+ {id:'ASS-01',area:'Assurance',title:'Plan a service assessment',type:'required',owner:'Service owner / Service Assessment Plus',when:'Plan early; assessments at relevant phase end',source:'DfE Service assessments guidance',url:u.service,action:'Confirm whether a service assessment applies, book the right panel and plan evidence across delivery.',evidence:'Assessment booking and outcomes',explain:'The work involves a transactional service or transaction journey.',check:f=>OR(equals(f,'kind','transactional'),yes(f,'transaction'))},
+ {id:'ASS-02',area:'Assurance',title:'Confirm if a cross-government assessment panel is needed',type:'review',owner:'Service Assessment Plus',when:'During planning and before booking',source:'DfE Service assessments guidance',url:u.service,action:'Confirm annual volume and cross-organisation users to select the appropriate assessment panel.',evidence:'Panel routing determination',explain:'Transaction volume meets the indicated 100,000 threshold; the assessment team should verify route.',check:f=>AND(OR(equals(f,'kind','transactional'),yes(f,'transaction')),equals(f,'yearly','over'))},
+ {id:'OPS-01',area:'Operations',title:'Check ServiceNow service offering and operational readiness',type:'review',owner:'Service Management / Product owner',when:'Before entering Run or material live change',source:'Proposed DfE operational integration – validate with Service Management',url:u.manual,action:'Confirm service offering, support ownership, incident route, CMDB relationships and readiness evidence.',evidence:'ServiceNow record and readiness decision',explain:'A digital service is preparing to go live or materially change in Run.',check:f=>AND(yes(f,'goingLive'),oneOf(f,'kind',['transactional','information','api','internal','purchase']))},
+ {id:'OPS-02',area:'Operations',title:'Reassess obligations following a material change',type:'required',owner:'Product owner / Central Ops',when:'Before releasing the change',source:'Proposed DfE lifecycle rule – validate with governance owners',url:u.manual,action:'Re-run applicable rules; update DPIA screening, accessibility evidence, assurance and support arrangements where necessary.',evidence:'Change assessment and updated linked actions',explain:'The service has been recorded as materially changing.',check:f=>equals(f,'change','material')}
+];
+const ruleMap=Object.fromEntries(rules.map(r=>[r.id,r]));
+function evaluate(f){return rules.map(r=>{let raw=r.check(f),status=raw===true?r.type:raw===null?'unknown':'no';return {id:r.id,status};})}
+function nowRun(w){return w.runs[0]||null}
+function fingerprint(f){return JSON.stringify(Object.keys(f).sort().map(k=>[k,f[k]]))}
+function needsRerun(w){return !nowRun(w)||nowRun(w).fingerprint!==fingerprint(w.f)}
+function run(w){const outcome=evaluate(w.f);const entry={at:dateStamp(),fingerprint:fingerprint(w.f),characteristics:cloned(w.f),outcome};w.runs.unshift(entry);log(w,`Requirements checked: ${outcome.filter(x=>x.status==='required').length} actions, ${outcome.filter(x=>x.status==='review').length} reviews and ${outcome.filter(x=>x.status==='unknown').length} questions to confirm.`);save();return entry}
+function getResults(w){return nowRun(w)?.outcome||[]}
+function counts(results){return {required:results.filter(x=>x.status==='required').length,review:results.filter(x=>x.status==='review').length,unknown:results.filter(x=>x.status==='unknown').length}}
+function workUrl(w,part=''){return '#work/'+encodeURIComponent(w.id)+(part?'/'+part:'')}
+function go(url){if(location.hash===url){render();return}location.hash=url}
+function title(s){document.title=s+' – COMPASS rules assessment – Department for Education'}
+function breadcrumbs(w,part){return `<nav class="govuk-breadcrumbs" aria-label="Breadcrumb"><ol class="govuk-breadcrumbs__list"><li class="govuk-breadcrumbs__list-item"><a href="#home">Home</a></li><li class="govuk-breadcrumbs__list-item"><a href="#work">Example work</a></li>${w?`<li class="govuk-breadcrumbs__list-item">${part?`<a href="${workUrl(w)}">${esc(w.ref)}</a>`:esc(w.ref)}</li>`:''}${part?`<li class="govuk-breadcrumbs__list-item">${esc(part)}</li>`:''}</ol></nav>`}
+function fieldDisplay(k,v){const field=allFields.find(x=>x.id===k);return field?.opts.find(o=>o[0]===v)?.[1]||v||'Not yet known'}
+function summary(w){return `<dl class="govuk-summary-list"><div class="govuk-summary-list__row"><dt class="govuk-summary-list__key">Work reference</dt><dd class="govuk-summary-list__value">${esc(w.ref)}</dd></div><div class="govuk-summary-list__row"><dt class="govuk-summary-list__key">Source of demand</dt><dd class="govuk-summary-list__value">${esc(w.source)}</dd></div><div class="govuk-summary-list__row"><dt class="govuk-summary-list__key">Work type</dt><dd class="govuk-summary-list__value">${esc(fieldDisplay('kind',w.f.kind))}</dd></div><div class="govuk-summary-list__row"><dt class="govuk-summary-list__key">Lifecycle</dt><dd class="govuk-summary-list__value">${esc(w.f.stage)}</dd></div><div class="govuk-summary-list__row"><dt class="govuk-summary-list__key">Personal data</dt><dd class="govuk-summary-list__value">${esc(fieldDisplay('personal',w.f.personal))}</dd></div></dl>`}
+function aside(w){return `<aside class="side-contents" aria-label="Work sections"><h2>For this work</h2><ul><li><a href="${workUrl(w)}">Overview</a></li><li><a href="${workUrl(w,'details')}">Work characteristics</a></li><li><a href="${workUrl(w,'data')}">Data and security</a></li><li><a href="${workUrl(w,'results')}">Requirements</a></li><li><a href="${workUrl(w,'actions')}">Action plan</a></li><li><a href="${workUrl(w,'history')}">History</a></li></ul><p class="source-note">Your changes stay in this browser. Nothing is sent to a server.</p></aside>`}
+function layout(w,part,contents){return breadcrumbs(w,part)+`<div class="govuk-grid-row"><div class="govuk-grid-column-two-thirds">${contents}</div><div class="govuk-grid-column-one-third">${aside(w)}</div></div>`}
+function renderHome(){title('Check requirements');return `<span class="govuk-caption-xl">COMPASS · Delivery lifecycle</span><h1 class="govuk-heading-xl">Check what your team needs to do</h1><p class="govuk-body-l">New work and changes to live services should trigger the right requirements before they become problems.</p><div class="prototype-kicker"><p><strong>Try the proposed rules engine</strong></p><p>Choose a fictional piece of work, update its characteristics and see the resulting accessibility, security and data protection requirements.</p></div><a href="#work" class="govuk-button">Start prototype</a><h2 class="govuk-heading-l">What this would change</h2><ul class="govuk-list govuk-list--bullet"><li>Teams find out what standards and activities apply during triage, not at the end of delivery.</li><li>Changes to services trigger a fresh assessment of the relevant requirements.</li><li>Each requirement becomes a tracked action with an owner, evidence and a link back to the rule.</li></ul><div class="flow-sentence"><strong>New demand</strong><span>&gt;</span><strong>Categorise</strong><span>&gt;</span><strong>Check rules</strong><span>&gt;</span><strong>Manage actions</strong></div><div class="govuk-inset-text"><strong>Workshop concept only.</strong> These examples draw on published DfE and ICO requirements but are not approved executable DfE policies. Specialist teams would need to validate and own rules before a real launch.</div>`}
+function renderWorks(){title('Example work');return breadcrumbs()+`<h1 class="govuk-heading-xl">Choose a piece of work</h1><p class="govuk-body-l">These fictional examples demonstrate how different characteristics trigger different DfE requirements.</p><div class="work-list">${Object.values(data.items).map(w=>`<article class="work-item"><span class="meta">${esc(w.ref)} · ${esc(w.source)} · ${esc(w.f.stage)}</span><h2><a href="${workUrl(w)}">${esc(w.name)}</a></h2><p>${esc(w.description)}</p><div class="work-item__footer"><a class="govuk-button" href="${workUrl(w,'details')}">Check this work</a>${w.runs.length?'<strong class="govuk-tag govuk-tag--blue">Checked</strong>':''}</div></article>`).join('')}</div><a href="#new" class="govuk-button govuk-button--secondary">Create fictional demand</a><p class="govuk-body-s">No personal data is needed. Any new work you create exists only in your browser session.</p>`}
+function renderOverview(w){title(w.name);return layout(w,null,`<span class="govuk-caption-xl">${esc(w.ref)} · ${esc(w.f.stage)}</span><h1 class="govuk-heading-xl">${esc(w.name)}</h1><p class="govuk-body-l">${esc(w.description)}</p>${summary(w)}<h2 class="govuk-heading-m">Check requirements for this work</h2><p>Confirm its characteristics first. The prototype then checks each example rule and explains the result.</p><ol class="task-progress"><li><span class="num">1</span><div><a href="${workUrl(w,'details')}">Categorise the work</a><br><span class="govuk-body-s">Type, audience, channel and transactions</span></div></li><li><span class="num">2</span><div><a href="${workUrl(w,'data')}">Confirm data and security</a><br><span class="govuk-body-s">Personal data, suppliers and identity</span></div></li><li><span class="num">3</span><div><a href="${workUrl(w,'results')}">Review applicable requirements</a><br><span class="govuk-body-s">See matched rules and why they apply</span></div></li><li><span class="num">4</span><div><a href="${workUrl(w,'actions')}">Manage the action plan</a><br><span class="govuk-body-s">Assign and track required activities</span></div></li></ol>${w.id==='campaign'?`<div class="govuk-notification-banner"><div class="govuk-notification-banner__header"><p class="govuk-notification-banner__title">Try a material change</p></div><div class="govuk-notification-banner__content"><p>Add an application form to this information site, start collecting personal data, and see which new requirements appear.</p><button type="button" data-action="material" data-id="${esc(w.id)}" class="govuk-button govuk-button--secondary">Apply example material change</button></div></div>`:''}<button class="govuk-button govuk-button--secondary" data-action="reset-work" data-id="${esc(w.id)}" type="button">Reset this fictional work</button>`)}
+function radioField(field,current){let id=field.id;return `<div class="govuk-form-group"><fieldset class="govuk-fieldset" aria-describedby="${id}-hint"><legend class="govuk-fieldset__legend">${esc(field.label)}</legend>${field.hint?`<div class="govuk-hint" id="${id}-hint">${esc(field.hint)}</div>`:''}<div class="govuk-radios" data-module="govuk-radios">${field.opts.map(([v,label],i)=>`<div class="govuk-radios__item"><input class="govuk-radios__input" type="radio" id="${id}-${i}" name="${id}" value="${esc(v)}" ${current===v?'checked':''}><label class="govuk-radios__label" for="${id}-${i}">${esc(label)}</label></div>`).join('')}</div></fieldset></div>`}
+function renderForm(w,section){let first=section==='details',list=first?fieldsInfo:fieldsRisk;title(first?'Categorise the work':'Data and security');return layout(w,first?'Work characteristics':'Data and security',`<a href="${first?workUrl(w):workUrl(w,'details')}" class="govuk-back-link">&lt; Back</a><span class="govuk-caption-xl">${first?'Step 1 of 2':'Step 2 of 2'} · ${esc(w.ref)}</span><h1 class="govuk-heading-xl">${first?'Categorise the work':'Data protection and security'}</h1><p class="govuk-body">Answer what you know now. Unknown answers will be flagged for follow-up rather than treated as not applicable.</p><form id="work-form" data-id="${esc(w.id)}" data-section="${section}">${list.map(f=>radioField(f,w.f[f.id])).join('')}<button class="govuk-button" type="submit">${first?'Continue':'Check requirements'}</button><p class="govuk-body-s">You can return and change these answers at any time.</p></form>`)}
+function tag(status){return `<strong class="govuk-tag govuk-tag--${status==='required'?'blue':status==='review'?'yellow':status==='unknown'?'red':'grey'}">${status==='required'?'Action':status==='review'?'Specialist review':status==='unknown'?'Question':'Not applicable'}</strong>`}
+function details(r,status){return `<details class="govuk-details"><summary class="govuk-details__summary">Why has this rule ${status==='unknown'?'been flagged':'applied'}?</summary><div class="govuk-details__text"><p><strong>Why:</strong> ${status==='unknown'?'One or more characteristics needed to evaluate this rule are not yet known.':esc(r.explain)}</p><p><strong>Rule:</strong> ${esc(r.id)} · demonstration version 0.1</p><p><strong>When:</strong> ${esc(r.when)}</p><p><strong>Evidence:</strong> ${esc(r.evidence)}</p><p><strong>Source:</strong> <a href="${esc(r.url)}" target="_blank" rel="noopener noreferrer">${esc(r.source)} (opens in a new tab)</a></p><p class="govuk-body-s">A standards or specialist owner would need to validate this rule before production use.</p></div></details>`}
+function resultRow(o){const r=ruleMap[o.id];return `<article class="rule-result"><div class="rule-result__meta">${esc(r.area)} · ${esc(r.id)} · ${esc(r.when)}</div>${tag(o.status)}<h3>${esc(r.title)}</h3>${o.status==='unknown'?`<p>More information is needed before we can decide whether this applies.</p><p><a href="${r.area==='Data protection'||r.area==='Security'?workUrl(currentWork,'data'):workUrl(currentWork,'details')}">Review work characteristics</a></p>`:`<p>${esc(r.explain)}</p><div class="rule-result__next"><p><strong>Next action:</strong> ${esc(r.action)}</p><p class="govuk-body-s" style="margin-top:8px"><strong>Suggested owner:</strong> ${esc(r.owner)}</p></div>`}${details(r,o.status)}</article>`}
+let currentWork=null;
+function renderResults(w){title('Applicable requirements');if(needsRerun(w))run(w);const results=getResults(w),c=counts(results);currentWork=w;const delta=w.runs.length>1?compareDelta(w):null;return layout(w,'Requirements',`<a href="${workUrl(w,'data')}" class="govuk-back-link">&lt; Back to characteristics</a><span class="govuk-caption-xl">${esc(w.ref)} · Rules assessment</span><h1 class="govuk-heading-xl">Requirements for this work</h1><p class="govuk-body-l">These results are based on the information recorded for <strong>${esc(w.name)}</strong>.</p><div class="results-summary" aria-label="Summary"><div class="results-summary__stat"><strong>${c.required}</strong><span>Actions</span></div><div class="results-summary__stat"><strong>${c.review}</strong><span>Specialist reviews</span></div><div class="results-summary__stat"><strong>${c.unknown}</strong><span>Questions to confirm</span></div></div>${delta&&delta.length?`<div class="govuk-notification-banner"><div class="govuk-notification-banner__header"><p class="govuk-notification-banner__title">Requirements changed</p></div><div class="govuk-notification-banner__content"><p><strong>${delta.length} additional rules</strong> now apply compared with the previous assessment.</p><p>${delta.map(id=>esc(ruleMap[id].title)).join('; ')}.</p><a href="${workUrl(w,'compare')}">See what changed</a></div></div>`:''}<div class="govuk-inset-text review-inset">Rules identify activities to undertake or decisions to request. They do not confirm that work is compliant or that approvals have been granted.</div>${w.id==='campaign'&&!w.runs.some(x=>x.characteristics.change==='material')?`<div class="govuk-inset-text review-inset"><p><strong>Try a material change:</strong> What happens if this information website begins collecting personal data through an application form?</p><button type="button" class="govuk-button govuk-button--secondary" data-action="material" data-id="${esc(w.id)}">Apply example change</button></div>`:''}<button type="button" class="govuk-button" data-action="make-actions" data-id="${esc(w.id)}">Create or update action plan</button><a href="${workUrl(w,'details')}" class="govuk-button govuk-button--secondary">Change characteristics</a><div class="rule-filter no-print" aria-label="Filter requirements"><button class="govuk-button govuk-button--secondary selected" data-filter="all" type="button">All (${c.required+c.review+c.unknown})</button><button class="govuk-button govuk-button--secondary" data-filter="required" type="button">Actions</button><button class="govuk-button govuk-button--secondary" data-filter="review" type="button">Reviews</button><button class="govuk-button govuk-button--secondary" data-filter="unknown" type="button">Questions</button></div><div id="filtered-results" class="rules-results">${results.filter(x=>x.status!=='no').map(resultRow).join('')||'<p>No rules are applicable for these characteristics.</p>'}</div><p class="govuk-body-s">Assessment generated ${esc(nowRun(w).at)} · ${rules.length} demonstration rules evaluated. <a href="${workUrl(w,'history')}">View evaluation history</a>.</p>`)}
+function compareDelta(w){if(w.runs.length<2)return [];const prior=new Set(w.runs[1].outcome.filter(x=>x.status==='required'||x.status==='review').map(x=>x.id));return w.runs[0].outcome.filter(x=>(x.status==='required'||x.status==='review')&&!prior.has(x.id)).map(x=>x.id)}
+function makeActions(w){if(needsRerun(w))run(w);let made=0;for(let o of getResults(w)){if(!['required','review'].includes(o.status))continue;if(!w.actions[o.id]){w.actions[o.id]={owner:ruleMap[o.id].owner,status:'Not started',created:dateStamp()};made++}}log(w,`${made} new unique actions generated from current requirements.`);return made}
+function renderActions(w){title('Action plan');let ids=Object.keys(w.actions);return layout(w,'Action plan',`<a href="${workUrl(w,'results')}" class="govuk-back-link">&lt; Back to requirements</a><span class="govuk-caption-xl">${esc(w.ref)}</span><h1 class="govuk-heading-xl">Action plan</h1>${ids.length?`<p class="govuk-body-l">${ids.length} linked actions. Each action is created once, even if rules are checked again.</p><div class="govuk-inset-text">Suggested owners are examples, not named allocations. A real service would assign accountable people and track evidence in COMPASS.</div><div id="action-msg"></div><form id="actions-form" data-id="${esc(w.id)}">${ids.map(id=>{let r=ruleMap[id],a=w.actions[id];return `<div class="action-line"><div><div class="rule-result__meta">${esc(id)} · ${esc(r.area)}</div><p class="action-line__name">${esc(r.title)}</p><p class="govuk-body-s">${esc(r.action)}</p><p class="action-line__details"><strong>Proposed owner:</strong> ${esc(a.owner)}<br><strong>Evidence:</strong> ${esc(r.evidence)}</p></div><div><label class="govuk-label govuk-label--s" for="action-${id}">Status</label><select class="govuk-select" id="action-${id}" name="${id}">${['Not started','In progress','Waiting for specialist','Completed'].map(s=>`<option value="${s}" ${a.status===s?'selected':''}>${s}</option>`).join('')}</select></div></div>`}).join('')}<button class="govuk-button" type="submit">Save action statuses</button></form>`:`<p class="govuk-body-l">There are no actions yet.</p><p>Check the rules first, then create an action plan.</p><a class="govuk-button" href="${workUrl(w,'results')}">Check requirements</a>`}`)}
+function renderCompare(w){title('What changed');if(w.runs.length<2)return layout(w,'Comparison',`<h1 class="govuk-heading-xl">No previous assessment</h1><p>Change the work and check the rules again to compare results.</p><a href="${workUrl(w,'details')}">Change characteristics</a>`);let a=w.runs[1],b=w.runs[0],changes=allFields.filter(f=>a.characteristics[f.id]!==b.characteristics[f.id]),add=compareDelta(w),removed=a.outcome.filter(x=>['required','review'].includes(x.status)&&!b.outcome.some(y=>y.id===x.id&&['required','review'].includes(y.status)));return layout(w,'Comparison',`<a href="${workUrl(w,'results')}" class="govuk-back-link">&lt; Back to requirements</a><h1 class="govuk-heading-xl">What changed?</h1><p class="govuk-body-l">Compare the two latest assessments for ${esc(w.name)}.</p><h2 class="govuk-heading-m">Updated characteristics</h2><table class="govuk-table"><thead><tr><th class="govuk-table__header">Characteristic</th><th class="govuk-table__header">Before</th><th class="govuk-table__header">After</th></tr></thead><tbody>${changes.map(f=>`<tr><td class="govuk-table__cell">${esc(f.label)}</td><td class="govuk-table__cell">${esc(fieldDisplay(f.id,a.characteristics[f.id]))}</td><td class="govuk-table__cell">${esc(fieldDisplay(f.id,b.characteristics[f.id]))}</td></tr>`).join('')||'<tr><td class="govuk-table__cell" colspan="3">No characteristics changed.</td></tr>'}</tbody></table><h2 class="govuk-heading-m">New applicable rules (${add.length})</h2><ul class="govuk-list govuk-list--bullet">${add.map(id=>`<li><strong>${esc(id)}</strong> – ${esc(ruleMap[id].title)}</li>`).join('')||'<li>None</li>'}</ul><h2 class="govuk-heading-m">No longer matched (${removed.length})</h2><ul class="govuk-list govuk-list--bullet">${removed.map(o=>`<li>${esc(o.id)} – ${esc(ruleMap[o.id].title)}</li>`).join('')||'<li>None</li>'}</ul><div class="govuk-inset-text">Previously completed actions and evidence would remain in the audit history. No action should be silently removed because a rule stops matching.</div><a class="govuk-button" href="${workUrl(w,'results')}">Review current requirements</a>`)}
+function renderHistory(w){title('Assessment history');return layout(w,'History',`<span class="govuk-caption-xl">${esc(w.ref)}</span><h1 class="govuk-heading-xl">Work and rule history</h1><p>Each assessment uses the characteristics and rule version in effect at that time.</p><table class="govuk-table"><thead><tr><th class="govuk-table__header">When</th><th class="govuk-table__header">Recorded change</th></tr></thead><tbody>${w.history.map(h=>`<tr><td class="govuk-table__cell">${esc(h.at)}</td><td class="govuk-table__cell">${esc(h.text)}</td></tr>`).join('')}</tbody></table><h2 class="govuk-heading-m">Rule versions</h2><p>All demo rules use version 0.1. A live rules catalogue would have owners, approval status, effective dates and an immutable version history.</p>`)}
+function renderRules(){title('Rule catalogue');return breadcrumbs()+`<h1 class="govuk-heading-xl">Example rule catalogue</h1><p class="govuk-body-l">${rules.length} illustrative rules covering accessibility, data protection, security, assurance and operations.</p><div class="govuk-inset-text">These rules combine published standards with proposed DDT processes. They need specialist validation before use in live governance or assurance.</div>${['Accessibility','Data protection','Security','Assurance','Operations'].map(area=>`<h2 class="govuk-heading-l">${area}</h2>${rules.filter(r=>r.area===area).map(r=>`<article class="demo-rule-category"><h3 class="govuk-heading-s">${esc(r.id)} · ${esc(r.title)}</h3><p class="govuk-body-s">${esc(r.action)}</p><p class="govuk-body-s"><strong>Owner:</strong> ${esc(r.owner)} · <strong>Version:</strong> 0.1 (demonstration)</p><details class="govuk-details"><summary class="govuk-details__summary">Source and application</summary><div class="govuk-details__text"><p>${esc(r.explain)}</p><p><a href="${esc(r.url)}" target="_blank" rel="noopener noreferrer">${esc(r.source)} (opens in new tab)</a></p></div></details></article>`).join('')}`).join('')}<h2 class="govuk-heading-m">How rules would be managed</h2><p><strong>Draft &gt; Test &gt; Specialist review &gt; Approve &gt; Publish &gt; Monitor &gt; Retire</strong></p><p>Rules would have named owners, version history, effective dates, explanation text and tests against example work. A new standard should prompt rule review, not automatically create live executable instructions.</p>`}
+function renderCreate(){title('Create demand');return breadcrumbs()+`<h1 class="govuk-heading-xl">Create fictional demand</h1><p class="govuk-body-l">Create your own work item to test the rules. Do not enter any real personal or sensitive information.</p><form id="new-work"><div class="govuk-form-group"><label class="govuk-label" for="new-name">Name of the work</label><input class="govuk-input" id="new-name" name="name" maxlength="100" required placeholder="For example, New parent support application"></div><div class="govuk-form-group"><label class="govuk-label govuk-label--s" for="new-source">Where did it come from?</label><select class="govuk-select" name="source" id="new-source">${['Policy team','Business area','InvestCo business case','Central Ops triage','Service improvement','Commercial request','Other demand'].map(s=>`<option>${s}</option>`).join('')}</select></div><button type="submit" class="govuk-button">Create work</button></form>`}
+function renderShare(){title('Share prototype');return breadcrumbs()+`<h1 class="govuk-heading-xl">Share the prototype</h1><p class="govuk-body-l">Publish this HTML file to a public HTTPS address. Use the address to generate a QR code that workshop attendees can scan.</p><div class="govuk-inset-text warning-inset"><strong>Local files cannot be shared by QR code.</strong> You need to host the file first, for example on Azure Static Web Apps.</div><form id="qr-form"><div class="govuk-form-group"><label class="govuk-label" for="share-url">Published prototype address</label><div class="govuk-hint">For example, https://your-site.azurestaticapps.net/</div><input class="govuk-input" id="share-url" type="url" required value="${location.protocol==='https:'&&!['localhost','127.0.0.1'].includes(location.hostname)?esc(location.href.split('#')[0]):''}" placeholder="https://"></div><button class="govuk-button" type="submit">Generate QR code</button></form><div id="qr-error" class="govuk-error-message" aria-live="assertive"></div><div id="qr-output"></div>`}
+function qrSvg(address){let url=new URL(address);if(url.protocol!=='https:')throw Error('Use the public HTTPS address of your hosted prototype.');if(['localhost','127.0.0.1','0.0.0.0'].includes(url.hostname))throw Error('A local address will not open on other people’s phones.');url.hash='';const q=new WorkshopQRCode(0,0);q.addData(url.toString());q.make();let n=q.getModuleCount(),size=n+8,path='';for(let y=0;y<n;y++)for(let x=0;x<n;x++)if(q.isDark(y,x))path+=`M${x+4} ${y+4}h1v1h-1z`;return {svg:`<svg xmlns="http://www.w3.org/2000/svg" role="img" aria-label="QR code to access the DfE workshop prototype" shape-rendering="crispEdges" viewBox="0 0 ${size} ${size}"><rect width="${size}" height="${size}" fill="#fff"/><path d="${path}" fill="#0b0c0c"/></svg>`,url:url.toString()}}
+function generateQr(){try{const {svg,url}=qrSvg(document.getElementById('share-url').value);document.getElementById('qr-error').textContent='';document.getElementById('qr-output').innerHTML=`<div class="qr-card"><p class="govuk-body-s"><strong>Department for Education · DDT workshop</strong></p><h2 class="govuk-heading-m">Try the COMPASS rules engine</h2><p>See what a new project needs to do about accessibility, security and data protection.</p>${svg}<p class="govuk-body-s">${esc(url)}</p><p class="govuk-body-s">Fictional data · Prototype only</p></div><div class="no-print"><button type="button" class="govuk-button" id="qr-download">Download QR code</button><button type="button" class="govuk-button govuk-button--secondary" id="qr-print">Print QR card</button></div>`;document.getElementById('qr-download').onclick=()=>{const blob=new Blob([svg],{type:'image/svg+xml'}),blobUrl=URL.createObjectURL(blob),a=document.createElement('a');a.href=blobUrl;a.download='dfe-compass-workshop-qr.svg';a.click();setTimeout(()=>URL.revokeObjectURL(blobUrl),1000)};document.getElementById('qr-print').onclick=()=>window.print();}catch(err){document.getElementById('qr-output').innerHTML='';document.getElementById('qr-error').textContent=err.message||'Enter a valid address.'}}
+function applyMaterial(w){if(needsRerun(w))run(w);w.f={...w.f,kind:'transactional',change:'material',browser:'yes',transaction:'yes',yearly:'under',identity:'yes',personal:'yes',children:'yes',highRisk:'unknown',special:'no',login:'yes',goingLive:'yes',stage:'Improve'};log(w,'Material change: information website adds a transactional application that collects personal data.');run(w);go(workUrl(w,'results'))}
+function filterResults(w,filter){currentWork=w;const options=getResults(w).filter(r=>filter==='all'?r.status!=='no':r.status===filter);const dest=document.getElementById('filtered-results');if(dest)dest.innerHTML=options.map(resultRow).join('')||'<p>No requirements in this group.</p>';document.querySelectorAll('[data-filter]').forEach(el=>el.classList.toggle('selected',el.dataset.filter===filter))}
+function render(){const parts=decodeURIComponent((location.hash||'#home').slice(1)).split('/');let body='';const w=data.items[parts[1]];if(parts[0]==='home')body=renderHome();else if(parts[0]==='work'&&!parts[1])body=renderWorks();else if(parts[0]==='work'&&w){const action=parts[2]||'';body=action==='details'?renderForm(w,'details'):action==='data'?renderForm(w,'data'):action==='results'?renderResults(w):action==='actions'?renderActions(w):action==='compare'?renderCompare(w):action==='history'?renderHistory(w):renderOverview(w)}else if(parts[0]==='rules')body=renderRules();else if(parts[0]==='new')body=renderCreate();else if(parts[0]==='share')body=renderShare();else body='<h1 class="govuk-heading-xl">Page not found</h1><a href="#home">Back to start</a>';app.innerHTML=body;for(let v of ['work','rules','share'])document.getElementById('nav-'+v).classList.toggle('govuk-service-navigation__item--active',v===(parts[0]==='work'||parts[0]==='new'?'work':parts[0]));window.scrollTo(0,0);}
+document.addEventListener('submit',ev=>{const form=ev.target;if(form.id==='work-form'){ev.preventDefault();const w=data.items[form.dataset.id];if(!w)return;const section=form.dataset.section;const values=new FormData(form);for(const item of section==='details'?fieldsInfo:fieldsRisk)w.f[item.id]=values.get(item.id)||no;log(w,`${section==='details'?'Work classification':'Data and security characteristics'} updated.`);go(section==='details'?workUrl(w,'data'):workUrl(w,'results'))}else if(form.id==='new-work'){ev.preventDefault();const fd=new FormData(form),name=String(fd.get('name')||'').trim().slice(0,100);if(!name){alert('Enter a name for the fictional work.');return}const id='demo-'+Date.now().toString(36),f=Object.fromEntries(allFields.map(field=>[field.id,'unknown']));f.stage='Idea';data.items[id]={id,ref:'WORK-DEMO',name,source:String(fd.get('source')||'Other demand'),description:'New fictional work created during the workshop.',f,runs:[],actions:{},history:[{at:dateStamp(),text:'Fictional Work record created'}]};save();go(workUrl(data.items[id],'details'))}else if(form.id==='actions-form'){ev.preventDefault();const w=data.items[form.dataset.id],fd=new FormData(form);for(const [id,a] of Object.entries(w.actions))a.status=String(fd.get(id)||a.status);log(w,'Action statuses updated.');document.getElementById('action-msg').innerHTML='<div class="action-message" role="status"><strong>Action statuses saved.</strong> Changes are held in this browser only.</div>'}else if(form.id==='qr-form'){ev.preventDefault();generateQr()}});
+document.addEventListener('click',ev=>{const t=ev.target.closest('[data-action]');if(!t)return;const w=data.items[t.dataset.id];if(t.dataset.action==='material'&&w)applyMaterial(w);else if(t.dataset.action==='make-actions'&&w){const count=makeActions(w);go(workUrl(w,'actions'));document.getElementById('announcements').textContent=count+' new actions added.'}else if(t.dataset.action==='reset-work'&&w){const orig=examples.find(x=>x.id===w.id);if(orig&&confirm('Reset this example? Your assessments and actions for it will be cleared.')){data.items[w.id]={...cloned(orig),runs:[],actions:{},history:[{at:dateStamp(),text:'Example reset'}]};save();go(workUrl(data.items[w.id]))}}else if(t.dataset.filter){const id=(location.hash.split('/')[1]||'');const w=data.items[id];if(w)filterResults(w,t.dataset.filter)}});
+window.addEventListener('hashchange',render);
+if(!location.hash)location.hash='#home';else render();
+// Useful for testing with sample data; never exposed as a production API.
+window.COMPASS_DEMO={get examples(){return Object.values(data.items)},rules,evaluate,counts,reset(){data=seeding();save();render()}};
+})();
+
+</script>
+<!-- Official GOV.UK Frontend progressive enhancement. All core prototype functionality works without this script. -->
+<script type="module">import { initAll } from 'https://cdn.jsdelivr.net/npm/govuk-frontend@6.6.0/dist/govuk/govuk-frontend.min.js';try{initAll()}catch(err){console.warn('GOV.UK enhancement unavailable',err)}</script>
+</body></html>
